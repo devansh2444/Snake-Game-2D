@@ -5257,7 +5257,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 29cd5fa083a9a4d448c49c770629f19e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e839e6693c344ad40a5952853a891866, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6471,7 +6471,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1119248733}
         m_TargetAssemblyTypeName: SettingManager, Assembly-CSharp
-        m_MethodName: SettingsButton
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6531,6 +6531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae97fd49d7ceeb4478564dd9b4382041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 699277827}
   settings: {fileID: 172439529}
   settingscreen: {fileID: 157631739}
   controls: {fileID: 1435145398}
@@ -6542,6 +6543,7 @@ MonoBehaviour:
   backArrowButtonForAudioScreen: {fileID: 1561099646}
   backArrowButtonForLevelScreen: {fileID: 1258863842}
   pauseMenuPanel: {fileID: 591848599}
+  settingMenu: {fileID: 0}
   clickAudioClip: {fileID: 8300000, guid: 52104bc3637e70540be457e0ba1ba9cd, type: 3}
   controllerButton: {fileID: 673370603}
   joysticButton: {fileID: 489694607}
@@ -8563,7 +8565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1446626733
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8582,7 +8584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -124.99988, y: -145.00012}
+  m_AnchoredPosition: {x: -125, y: -145.00012}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1446626734
@@ -8629,8 +8631,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
+      - m_Target: {fileID: 1119248733}
+        m_TargetAssemblyTypeName: SettingManager, Assembly-CSharp
         m_MethodName: SettingsButton
         m_Mode: 1
         m_Arguments:

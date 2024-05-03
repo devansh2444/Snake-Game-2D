@@ -9,12 +9,12 @@ public class PauseMenu : MonoBehaviour
    public GameObject pauseButton;
    
    private AudioSource audioSource;
-
+  
 
     private void Start() 
     {
+     
         audioSource = GetComponent<AudioSource>(); 
-          
     }
 
 
@@ -31,6 +31,7 @@ public class PauseMenu : MonoBehaviour
    {
         pauseButton.SetActive(true);
         PauseMenuPanel.SetActive(false); 
+        
         Time.timeScale = 1;
         //GameStateManager.LoadGameState(FindObjectOfType<Snake>());
         PlayClickSound();

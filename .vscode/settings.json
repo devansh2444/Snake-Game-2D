@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Snake-Game-2D-main.sln"
+    "dotnet.defaultSolution": "Snake-Game-2D.sln"
 }

@@ -73,7 +73,14 @@ public class Snake : MonoBehaviour {
     public GameObject downButton;
 
     public GameObject joyStick;
+   
+    
     public GameObject Walls;
+    private bool isMode;
+    private bool isModeJoyStick;
+    private bool isSwipeMode;
+    public static Snake Instance;
+    
     
     public void Setup(LevelGrid levelGrid) {
         this.levelGrid = levelGrid;
@@ -86,6 +93,9 @@ public class Snake : MonoBehaviour {
         return intValue == 1 ? true : false;
      }
     private void Start() {
+         // Subscribe to the event for control settings changes
+        SettingManager.OnControlSettingsChanged += UpdateControlSettings;
+         LoadControlSettings();
         speed = 0.9f;
         audioSource = GameObject.Find("Snake").GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
@@ -93,56 +103,107 @@ public class Snake : MonoBehaviour {
         bool isModeJoyStick = intToBool(PlayerPrefs.GetInt("isModeJoyStick"));
         bool isLevel = intToBool(PlayerPrefs.GetInt("isLevel"));
 
-        if(isLevel == true)
-        {
-             Walls.gameObject.SetActive(false);
-        }
-        else
-        {
-            Walls.gameObject.SetActive(true);
-        }
-         if(isMode == true){
-            ActivateControlButtons();
-        }
-        else{
-            DeactivateControlButtons();
+        // if(isLevel == true)
+        // {
+        //      Walls.gameObject.SetActive(false);
+        // }
+        // else
+        // {
+        //     Walls.gameObject.SetActive(true);
+        // }
+        //  if(isMode == true){
+        //     ActivateControlButtons();
+        // }
+        // else{
+        //     DeactivateControlButtons();
 
-        }
-        if(isModeJoyStick == true){
-            ActivateJoyStick();
-        }
-        else{
-            DeActivateJoyStick();
-        }
+        // }
+        // if(isModeJoyStick == true){
+        //     ActivateJoyStick();
+        // }
+        // else{
+        //     DeActivateJoyStick();
+        // }
         UpdateHighScoreUI();
 
         
     }
+    // Method to update control settings
+    private void UpdateControlSettings(bool isMode, bool isModeJoyStick, bool isSwipeMode)
+    {
+        this.isMode = isMode;
+        this.isModeJoyStick = isModeJoyStick;
+        this.isSwipeMode = isSwipeMode;
 
+        // Update control mechanism based on settings
+        if (isMode)
+        {
+            ActivateControlButtons();
+            DeActivateJoyStick();
+        }
+        else if (isModeJoyStick)
+        {
+            ActivateJoyStick();
+            DeactivateControlButtons();
+        }
+        else
+        {
+            // Handle other control mechanisms`
+            DeActivateJoyStick();
+            DeactivateControlButtons();
+        }
+    }
+    private void LoadControlSettings() 
+    {
+    bool isMode = PlayerPrefs.GetInt("IsMode", 0) == 1;
+    bool isModeJoyStick = PlayerPrefs.GetInt("IsModeJoyStick", 0) == 1;
+    bool isSwipeMode = PlayerPrefs.GetInt("IsSwipeMode",0) == 1;
+    UpdateControlSettings(isMode, isModeJoyStick, isSwipeMode);
+    }
     private void ActivateJoyStick () 
     {
-        joyStick.SetActive(true);    
+        // Check if the GameObject reference is null before accessing it
+    if (joyStick != null)
+    {
+        // Enable joystick
+        joyStick.SetActive(true);
+    }  
     }
     private void DeActivateJoyStick () 
     {
-        joyStick.SetActive(false);    
+        // Check if the GameObject reference is null before accessing it
+    if (joyStick != null)
+    {
+        // Disable joystick
+        joyStick.SetActive(false);
+    }   
     }
     // Method to activate control buttons
     private void ActivateControlButtons()
     {
+         // Check if the GameObject references are null before accessing them
+    if (leftButton != null && rightButton != null && upButton != null && downButton != null)
+    {
+        // Enable control buttons
         leftButton.SetActive(true);
         rightButton.SetActive(true);
         upButton.SetActive(true);
         downButton.SetActive(true);
     }
+    }
 
     // Method to deactivate control buttons
     private void DeactivateControlButtons()
     {
+        // Check if the GameObject references are null before accessing them
+    if (leftButton != null && rightButton != null && upButton != null && downButton != null)
+    {
+        // Disable control buttons
         leftButton.SetActive(false);
         rightButton.SetActive(false);
         upButton.SetActive(false);
         downButton.SetActive(false);
+    }
     }
     private void SetMoveDirection(Direction direction)
     {
@@ -164,7 +225,7 @@ public class Snake : MonoBehaviour {
 
     private void Update() {
         if(score >= 25){
-            print(score);
+            
             speed = 1f;
         }
         if(score >= 75){

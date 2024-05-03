@@ -33,8 +33,8 @@ public class LevelGrid {
     private ViewportHandler viewportHandler;
 
     void Awake() {
-        gridWidthForLevelGrid = viewportHandler.GridWidth - 0.5f;
-        gridHeightForLevelGrid = viewportHandler.GridHeight - 0.5f;
+        gridWidthForLevelGrid = viewportHandler.GridWidth;
+        gridHeightForLevelGrid = viewportHandler.GridHeight;
     }
     public LevelGrid(float width, float height, ViewportHandler viewportHandler) {
         this.width = width;
@@ -165,8 +165,8 @@ public class LevelGrid {
 
     public Vector3 ValidateGridPosition(Vector3 gridPosition) {
        
-        gridWidthForLevelGrid = viewportHandler.GridWidth - 0.5f;
-        gridHeightForLevelGrid = viewportHandler.GridHeight - 0.5f;
+        gridWidthForLevelGrid = viewportHandler.GridWidth;
+        gridHeightForLevelGrid = viewportHandler.GridHeight;
         
         if (gridPosition.x < -gridWidthForLevelGrid) {
             gridPosition.x = width - 1;

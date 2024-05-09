@@ -1,15 +1,3 @@
-/* 
-    ------------------- Code Monkey -------------------
-
-    Thank you for downloading this package
-    I hope you find it useful in your projects
-    If you have any questions let me know
-    Cheers!
-
-               unitycodemonkey.com
-    --------------------------------------------------
- */
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,7 +32,8 @@ public class Snake : MonoBehaviour {
     public GameObject gameOverCanvas;
     public GameObject gmaeAssets;
     public GameObject monsters;
-    public GameObject particleEttcts;
+    public GameObject particleEffects;
+    public GameObject particleEffects2XPowerUp;
     public AudioClip gameOverSound;
     public AudioClip powerUpSound;
     public AudioClip eatSound;
@@ -79,6 +68,8 @@ public class Snake : MonoBehaviour {
     private bool isMode;
     private bool isModeJoyStick;
     private bool isSwipeMode;
+    private bool isWall;
+    private bool isSimple;
     public static Snake Instance;
     
     
@@ -93,37 +84,19 @@ public class Snake : MonoBehaviour {
         return intValue == 1 ? true : false;
      }
     private void Start() {
+        PlayerPrefs.SetInt("IsSwipeMode", 1);
          // Subscribe to the event for control settings changes
         SettingManager.OnControlSettingsChanged += UpdateControlSettings;
-         LoadControlSettings();
+        SettingManager.OnLevelSettingsChanged += UpdateLevelSettings;
+        LoadControlSettings();
+        LoadLevelSettings();
         speed = 0.9f;
         audioSource = GameObject.Find("Snake").GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
-        bool isMode = intToBool(PlayerPrefs.GetInt("isMode"));
-        bool isModeJoyStick = intToBool(PlayerPrefs.GetInt("isModeJoyStick"));
-        bool isLevel = intToBool(PlayerPrefs.GetInt("isLevel"));
+        bool isMode = intToBool(PlayerPrefs.GetInt("IsMode"));
+        bool isModeJoyStick = intToBool(PlayerPrefs.GetInt("IsModeJoyStick"));
+        //bool isLevel = intToBool(PlayerPrefs.GetInt("isLevel"));
 
-        // if(isLevel == true)
-        // {
-        //      Walls.gameObject.SetActive(false);
-        // }
-        // else
-        // {
-        //     Walls.gameObject.SetActive(true);
-        // }
-        //  if(isMode == true){
-        //     ActivateControlButtons();
-        // }
-        // else{
-        //     DeactivateControlButtons();
-
-        // }
-        // if(isModeJoyStick == true){
-        //     ActivateJoyStick();
-        // }
-        // else{
-        //     DeActivateJoyStick();
-        // }
         UpdateHighScoreUI();
 
         
@@ -153,12 +126,54 @@ public class Snake : MonoBehaviour {
             DeactivateControlButtons();
         }
     }
+    private void UpdateLevelSettings(bool isSimple, bool isWall)
+    {
+        this.isSimple = isSimple;
+        this.isWall = isWall;
+
+        if(isSimple)
+        {
+            if(Walls != null)
+                Walls.gameObject.SetActive(false);
+        }
+        else if(isWall)
+        {
+            if(Walls!= null)
+                Walls.gameObject.SetActive(true);
+        }
+    }
     private void LoadControlSettings() 
     {
+
+Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") || PlayerPrefs.HasKey("IsSwipeMode"));
+         // Only load control settings if they are not already set
+    if (!PlayerPrefs.HasKey("IsMode") || !PlayerPrefs.HasKey("IsModeJoyStick") || !PlayerPrefs.HasKey("IsSwipeMode"))
+    {
+        // Set default control settings
+        PlayerPrefs.SetInt("IsMode", 0);
+        PlayerPrefs.SetInt("IsModeJoyStick", 0);
+        PlayerPrefs.SetInt("IsSwipeMode", 1);
+    }
+
+    // Load and update control settings
     bool isMode = PlayerPrefs.GetInt("IsMode", 0) == 1;
     bool isModeJoyStick = PlayerPrefs.GetInt("IsModeJoyStick", 0) == 1;
-    bool isSwipeMode = PlayerPrefs.GetInt("IsSwipeMode",0) == 1;
+    bool isSwipeMode = PlayerPrefs.GetInt("IsSwipeMode", 0) == 1;
+    
     UpdateControlSettings(isMode, isModeJoyStick, isSwipeMode);
+    // bool isMode = PlayerPrefs.GetInt("IsMode", 0) == 1;
+    // bool isModeJoyStick = PlayerPrefs.GetInt("IsModeJoyStick", 0) == 1;
+    // bool isSwipeMode = PlayerPrefs.GetInt("IsSwipeMode",1) == 1;
+    
+    // UpdateControlSettings(isMode, isModeJoyStick, isSwipeMode);
+    }
+
+    private void LoadLevelSettings() 
+    {
+        bool isSimple = PlayerPrefs.GetInt("IsSimple", 0) == 1;
+        bool isWall = PlayerPrefs.GetInt("IsWall",0) == 1;
+
+        UpdateLevelSettings(isSimple,isWall);
     }
     private void ActivateJoyStick () 
     {
@@ -205,7 +220,7 @@ public class Snake : MonoBehaviour {
         downButton.SetActive(false);
     }
     }
-    private void SetMoveDirection(Direction direction)
+    public void SetMoveDirection(Direction direction)
     {
         gridMoveDirection = direction;
     }
@@ -213,7 +228,7 @@ public class Snake : MonoBehaviour {
         gridPosition = new Vector3(0, 0);
         gridMoveTimerMax = .1f;
         gridMoveTimer = gridMoveTimerMax;
-        gridMoveDirection = Direction.Right;
+       // gridMoveDirection = Direction.Right;
 
         snakeMovePositionList = new List<SnakeMovePosition>();
         snakeBodySize = 0;
@@ -241,7 +256,12 @@ public class Snake : MonoBehaviour {
         switch (state) {
         case State.Alive:
             HandleInput();
-            HandleMobileInput();
+            if(isSwipeMode == true){
+                HandleTouchInput();
+            }
+            else if(isModeJoyStick == true){
+                FindObjectOfType<JoyStickMovement>().SetMoveDirectionFromJoystick();
+            }
             HandleGridMovement();
             handlePowerups();
            
@@ -250,7 +270,7 @@ public class Snake : MonoBehaviour {
             break;
         }
     }
-
+    // Handles inputs for keyboard
     private void HandleInput() {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
             if (gridMoveDirection != Direction.Down) {
@@ -275,8 +295,8 @@ public class Snake : MonoBehaviour {
 
     }
         
-
-    private void HandleMobileInput () 
+    // Touch Controls
+    private void HandleTouchInput () 
 {
     // Handle touch input (For moving snake using swiping the screen)
     if (Input.touchCount > 0)
@@ -321,7 +341,7 @@ public class Snake : MonoBehaviour {
 }
 
     
-
+    // For Button Controls
     public void ButtonLeftMovement()
         {
             SetMoveDirection(Direction.Left);
@@ -385,15 +405,9 @@ public class Snake : MonoBehaviour {
 
             foreach (SnakeBodyPart snakeBodyPart in snakeBodyPartList) {
                 Vector3 snakeBodyPartGridPosition = snakeBodyPart.GetGridPosition();
-                if (gridPosition == snakeBodyPartGridPosition) {
-                    if(PowerupLifeActive == false)
-                    {
-                    // Game Over!
-                    
-                    GameOver();
-                    
-                    
-                    }
+                if (gridPosition == snakeBodyPartGridPosition && PowerupLifeActive == false)
+                {
+                    GameOver();    
                 }
             }
 
@@ -503,6 +517,7 @@ public class Snake : MonoBehaviour {
     {
         Debug.Log("2xpoerupactive");
         audioSource.PlayOneShot(powerUpSound);
+        particleEffects2XPowerUp.gameObject.SetActive(true);
         FindObjectOfType<PowerupManager>().DestroyPowerup();
 
         ActivatePowerup2X();
@@ -536,15 +551,9 @@ private void OnCollisionEnter2D(Collision2D collision) {
 
 public void GameOver()
 {
-    //  audioSource.PlayOneShot(gameOverSound);
-     particleEttcts.gameObject.SetActive(true);
-//     pauseButton.gameObject.SetActive(false);
-//     gmaeAssets.gameObject.SetActive(false);
-//     monsters.gameObject.SetActive(false);
    
-//     gameOverCanvas.SetActive(true);
-// //    FindObjectOfType<MonsterMovement>().StopMonsterMovements();
-//     FindObjectOfType<PowerupManager>().StopPowerupSpawning();
+    particleEffects.gameObject.SetActive(true);
+
     state = State.Dead;
     SceneManager.LoadScene("GameOverScene");
    
@@ -585,8 +594,7 @@ public void UpdateScoreUI()
     public void ActivatePowerUpLife()
     {
         PowerupLifeActive = true;
-        // animator.SetActive(true);
-        //animator.SetBool("IsFading", true);
+        
         currentPowerupTime = powerupDuration;
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
          // Loop through each Monster and modify the Collider2D components
@@ -606,6 +614,7 @@ public void UpdateScoreUI()
     private void DeactivatePowerup2X()
     {
         powerup2XActive = false;
+        particleEffects2XPowerUp.gameObject.SetActive(false);
     }
 
     private void DeactivatePowerupLife () 

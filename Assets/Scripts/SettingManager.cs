@@ -17,8 +17,7 @@ public class SettingManager : MonoBehaviour
     public GameObject backArrowButtonForAudioScreen;
     public GameObject backArrowButtonForLevelScreen;
     public GameObject pauseMenuPanel;
-    public GameObject settingMenu;
-    private AudioSource audioSource;
+        private AudioSource audioSource;
 
 
     public AudioClip clickAudioClip;
@@ -26,6 +25,7 @@ public class SettingManager : MonoBehaviour
     public Button controllerButton;
     public Button joysticButton;
     public Button swipeButton;
+    public GameObject pauseButton;
 
     public Button simpleLevelButton;
     public Button wallsLevelButton;
@@ -41,46 +41,71 @@ public class SettingManager : MonoBehaviour
     private bool isMode;
     private bool isModeJoyStick;
     private bool isSwipeMode;
+    private bool isSimple;
+    private bool isWall;
     // Define events for settings changes
     public delegate void ControlSettingsChanged(bool isMode, bool isModeJoyStick, bool isSwipeMode);
     public static event ControlSettingsChanged OnControlSettingsChanged;
+
+    public delegate void LevelSettingsChanged(bool isSimple, bool isWall);
+    public static event LevelSettingsChanged OnLevelSettingsChanged;
     
 
     private void SaveControlSettings(bool isMode, bool isModeJoyStick, bool isSwipeMode)
     {
     PlayerPrefs.SetInt("IsMode", isMode ? 1 : 0);
     PlayerPrefs.SetInt("IsModeJoyStick", isModeJoyStick ? 1 : 0);
-    PlayerPrefs.SetInt("isSwipeMode", isSwipeMode ? 1 : 0);
+    PlayerPrefs.SetInt("IsSwipeMode", isSwipeMode ? 1 : 0);
     PlayerPrefs.Save();
+    }
+
+    private void SaveLevelSettings(bool isSimple, bool isWall)
+    {
+        PlayerPrefs.SetInt("IsSimple", isSimple ? 1 : 0);
+        PlayerPrefs.SetInt("IsWall", isWall ? 1 : 0);
+        PlayerPrefs.Save();
     }
      private void LoadControlSettings()
     {
         // Load control settings from PlayerPrefs
-        isMode = PlayerPrefs.GetInt("isMode", 0) == 1;
-        isModeJoyStick = PlayerPrefs.GetInt("isModeJoyStick", 0) == 1;
-        isSwipeMode = PlayerPrefs.GetInt("isSwipeMode", 0) == 1;
+        isMode = PlayerPrefs.GetInt("IsMode", 0) == 1;
+        isModeJoyStick = PlayerPrefs.GetInt("IsModeJoyStick", 0) == 1;
+        isSwipeMode = PlayerPrefs.GetInt("IsSwipeMode", 0) == 1;
         UpdateControlSettings(isMode, isModeJoyStick, isSwipeMode);
     }
-     private void UpdateControlSettings(bool isMode, bool isModeJoyStick, bool isSwipeMode) {
+
+    private void LoadLevelSettings()
+    {
+        // Load Level settings from PlayerPrefs
+        isSimple = PlayerPrefs.GetInt("IsSimple", 0) == 1;
+        isWall = PlayerPrefs.GetInt("IsWall",0) == 1;
+        UpdateLevelSettings(isSimple, isWall);
+    }
+    private void UpdateControlSettings(bool isMode, bool isModeJoyStick, bool isSwipeMode) 
+    {
     OnControlSettingsChanged?.Invoke(isMode, isModeJoyStick, isSwipeMode);
     SaveControlSettings(isMode, isModeJoyStick, isSwipeMode);
-}
+    }
+
+    private void UpdateLevelSettings(bool isSimple, bool isWall)
+    {
+        OnLevelSettingsChanged?.Invoke(isSimple, isWall);
+        SaveLevelSettings(isSimple, isWall);
+    }
     
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        
         // Load control settings from PlayerPrefs
-        LoadControlSettings();
-
+        //LoadControlSettings();
         // Update button sprites based on loaded control settings
-        UpdateButtonSprites();
-
+        UpdateControlButtonSprites();
+        UpdateLevelButtonSprites();
         //Retrieve saved preferences for button states
         int controllerButtonPressed = PlayerPrefs.GetInt("ControllerButtonPressed", 0);
         int joysticButtonPressed = PlayerPrefs.GetInt("JoystickButtonPressed", 0);
-        int swipeButtonPressed = PlayerPrefs.GetInt("SwipeButtonPressed", 0);
+        int swipeButtonPressed = PlayerPrefs.GetInt("SwipeButtonPressed", 1);
         simpleLevelButtonPressed = PlayerPrefs.GetInt("SimpleLevelButtonPressed", 0);
         wallsLevelButtonPressed = PlayerPrefs.GetInt("WallsLevelButtonPressed",0);
 
@@ -100,28 +125,21 @@ public class SettingManager : MonoBehaviour
     // Method to load control settings from PlayerPrefs
    
      // Method to update button sprites based on loaded control settings
-    private void UpdateButtonSprites()
+    private void UpdateControlButtonSprites()
     {
         // Set button sprites based on loaded control settings
         controllerButton.image.sprite = isMode ? pressedSprite : normalSprite;
         joysticButton.image.sprite = isModeJoyStick ? pressedSprite : normalSprite;
         swipeButton.image.sprite = isSwipeMode ? pressedSprite : normalSprite;
+       
     }
-     // Method to save control settings to PlayerPrefs
-    // private void SaveControlSettings()
-    // {
-    //     // Save control settings to PlayerPrefs
-    //     PlayerPrefs.SetInt("isMode", isMode ? 1 : 0);
-    //     PlayerPrefs.SetInt("isModeJoyStick", isModeJoyStick ? 1 : 0);
-    //     PlayerPrefs.SetInt("isSwipeMode", isSwipeMode ? 1 : 0);
-    // }
-   
-    //Method to update control settings
-    // private void UpdateControlSettings(bool isMode, bool isModeJoyStick)
-    // {
-    //     OnControlSettingsChanged?.Invoke(isMode, isModeJoyStick);
-    // }
-   
+
+    private void UpdateLevelButtonSprites()
+    {
+        simpleLevelButton.image.sprite = isSimple ? pressedSprite : normalSprite;
+        wallsLevelButton.image.sprite = isWall ? pressedSprite : normalSprite;
+    }
+    
 
     public void SettingsButton()
     {
@@ -195,6 +213,7 @@ public class SettingManager : MonoBehaviour
         pauseMenuPanel.gameObject.SetActive(true);
         settingButton.gameObject.SetActive(true);
         returnButton.gameObject.SetActive(false);
+        // pauseButton.gameObject.SetActive(true);
        
     }
 
@@ -247,7 +266,7 @@ public class SettingManager : MonoBehaviour
         UpdateControlSettings(true, false, false);
         // Save control settings to PlayerPrefs
         //SaveControlSettings();
-        UpdateButtonSprites();
+        UpdateControlButtonSprites();
         
         
     }
@@ -255,7 +274,7 @@ public class SettingManager : MonoBehaviour
      public void ControllerJoyStick()
     {
         PlayClickSound();
-         isMode = false;
+        isMode = false;
         isModeJoyStick = true;
         isSwipeMode = false;
         // PlayerPrefs.SetInt("isMode", boolToInt(false));
@@ -267,7 +286,7 @@ public class SettingManager : MonoBehaviour
         // Update control settings
         UpdateControlSettings(false, true, false);
         //SaveControlSettings();
-        UpdateButtonSprites();
+        UpdateControlButtonSprites();
          
     }
    
@@ -287,48 +306,36 @@ public class SettingManager : MonoBehaviour
         // Update control settings
         UpdateControlSettings(false, false, true);
         //SaveControlSettings();
-        UpdateButtonSprites();
+        UpdateControlButtonSprites();
        
 
     }
 
-   
-    // Method to update button sprites based on saved preferences
-    // private void UpdateButtonSprites()
-    // {
-    //     int controllerButtonPressed = PlayerPrefs.GetInt("ControllerButtonPressed", 0);
-    //     int joysticButtonPressed = PlayerPrefs.GetInt("JoystickButtonPressed", 0);
-    //     int swipeButtonPressed = PlayerPrefs.GetInt("SwipeButtonPressed", 0);
-    //     simpleLevelButtonPressed = PlayerPrefs.GetInt("SimpleLevelButtonPressed", 0);
-    //     wallsLevelButtonPressed = PlayerPrefs.GetInt("WallsLevelButtonPressed",0);
-
-    //     controllerButton.image.sprite = controllerButtonPressed == 1 ? pressedSprite : normalSprite;
-    //     joysticButton.image.sprite = joysticButtonPressed == 1 ? pressedSprite : normalSprite;
-    //     swipeButton.image.sprite = swipeButtonPressed == 1 ? pressedSprite : normalSprite;
-    //     simpleLevelButton.image.sprite = simpleLevelButtonPressed == 1 ? pressedSprite : normalSprite;
-    //     wallsLevelButton.image.sprite = wallsLevelButtonPressed == 1 ? pressedSprite : normalSprite;
-    // }
     public void LevelSimple()
     {
         PlayClickSound();
-        PlayerPrefs.SetInt("isLevel",boolToInt(true));
+        isSimple = true;
+        isWall = false;
+        // PlayerPrefs.SetInt("isLevel",boolToInt(true));
         PlayerPrefs.SetInt("SimpleLevelButtonPressed",1);
         PlayerPrefs.SetInt("WallsLevelButtonPressed",0);
-        // Update control settings
-        //UpdateControlSettings(true, false);
-        UpdateButtonSprites();
+        // Update Level settings
+        UpdateLevelSettings(true, false);
+        UpdateLevelButtonSprites();
        
     }
 
     public void LevelWall()
     {
         PlayClickSound();
-        PlayerPrefs.SetInt("isLevel",boolToInt(false));
+        isSimple = false;
+        isWall = true;
+        // PlayerPrefs.SetInt("isLevel",boolToInt(false));
         PlayerPrefs.SetInt("SimpleLevelButtonPressed",0);
         PlayerPrefs.SetInt("WallsLevelButtonPressed",1);
-        // Update control settings
-        //UpdateControlSettings(true, false);
-        UpdateButtonSprites();
+        // Update Level settings
+        UpdateLevelSettings(false, true);
+        UpdateLevelButtonSprites();
         
     }
   

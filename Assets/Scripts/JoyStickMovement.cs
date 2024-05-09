@@ -58,5 +58,32 @@ public class JoyStickMovement : MonoBehaviour
         joystickBG.transform.position = joystickOriginalPos;    
     }
 
+
+ public void SetMoveDirectionFromJoystick()
+    {
+        float angle = Vector2.SignedAngle(Vector2.right, joystickVec);
+
+        // Determine the direction based on the angle of the joystick vector
+        if (angle >= -45 && angle < 45)
+        {
+            // Right
+            FindObjectOfType<Snake>().SetMoveDirection(Snake.Direction.Right);
+        }
+        else if (angle >= 45 && angle < 135)
+        {
+            // Up
+            FindObjectOfType<Snake>().SetMoveDirection(Snake.Direction.Up);
+        }
+        else if (angle >= 135 || angle < -135)
+        {
+            // Left
+            FindObjectOfType<Snake>().SetMoveDirection(Snake.Direction.Left);
+        }
+        else if (angle >= -135 && angle < -45)
+        {
+            // Down
+            FindObjectOfType<Snake>().SetMoveDirection(Snake.Direction.Down);
+        }
+    }
     
 }

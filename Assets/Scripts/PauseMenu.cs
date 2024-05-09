@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
    [SerializeField] public GameObject PauseMenuPanel;
    public GameObject pauseButton;
-   
+   public GameObject settingButton;
    private AudioSource audioSource;
   
 
@@ -22,6 +22,7 @@ public class PauseMenu : MonoBehaviour
    {
         pauseButton.SetActive(false);
         PauseMenuPanel.SetActive(true);
+        settingButton.SetActive(true);
         Time.timeScale = 0;
         PlayClickSound();
 
@@ -31,7 +32,7 @@ public class PauseMenu : MonoBehaviour
    {
         pauseButton.SetActive(true);
         PauseMenuPanel.SetActive(false); 
-        
+        settingButton.SetActive(false);
         Time.timeScale = 1;
         //GameStateManager.LoadGameState(FindObjectOfType<Snake>());
         PlayClickSound();
@@ -45,10 +46,7 @@ public class PauseMenu : MonoBehaviour
    }
    public void GoToStartMenu()
     {
-          // GameStateManager.SaveGameState(FindObjectOfType<Snake>()); 
-          // bool hasSavedGameState = PlayerPrefs.HasKey("HasSavedGameState");
-          // PlayerPrefs.SetString("HasSavedGameState", "True");
-          // Debug.Log(hasSavedGameState);
+          
           PlayClickSound();
           Time.timeScale = 1;  
           

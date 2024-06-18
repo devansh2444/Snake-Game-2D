@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CodeMonkey;
+// using CodeMonkey;
 using TMPro;
-using CodeMonkey.Utils;
+// using CodeMonkey.Utils;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -28,12 +28,13 @@ public class Snake : MonoBehaviour {
     private Animator animator;
     public float powerupDuration = 15f; // Duration of the power-up in seconds
     public float currentPowerupTime; // Time remaining for the current power-up
-  public TextMeshProUGUI powerUpDurationText;
-    public GameObject gameOverCanvas;
+    public TextMeshProUGUI powerUpDurationText;
+    
     public GameObject gmaeAssets;
     public GameObject monsters;
     public GameObject particleEffects;
     public GameObject particleEffects2XPowerUp;
+    public GameObject particleEffectsLifePowerUp;
     public AudioClip gameOverSound;
     public AudioClip powerUpSound;
     public AudioClip eatSound;
@@ -71,6 +72,13 @@ public class Snake : MonoBehaviour {
     private bool isWall;
     private bool isSimple;
     public static Snake Instance;
+    public Sprite normalHead;
+    public Sprite nearFoodHead;
+    public Sprite gameOverHead;
+    private SpriteRenderer snakeHeadSpriteRenderer;
+
+    private Vector3 targetGridPosition;
+private bool isMoving = false;
     
     
     public void Setup(LevelGrid levelGrid) {
@@ -90,15 +98,15 @@ public class Snake : MonoBehaviour {
         SettingManager.OnLevelSettingsChanged += UpdateLevelSettings;
         LoadControlSettings();
         LoadLevelSettings();
-        speed = 0.9f;
+        speed = 0.7f;
         audioSource = GameObject.Find("Snake").GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         bool isMode = intToBool(PlayerPrefs.GetInt("IsMode"));
         bool isModeJoyStick = intToBool(PlayerPrefs.GetInt("IsModeJoyStick"));
         //bool isLevel = intToBool(PlayerPrefs.GetInt("isLevel"));
-
+            
         UpdateHighScoreUI();
-
+        
         
     }
     // Method to update control settings
@@ -107,6 +115,7 @@ public class Snake : MonoBehaviour {
         this.isMode = isMode;
         this.isModeJoyStick = isModeJoyStick;
         this.isSwipeMode = isSwipeMode;
+
 
         // Update control mechanism based on settings
         if (isMode)
@@ -226,10 +235,10 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
     }
     private void Awake() {
         gridPosition = new Vector3(0, 0);
-        gridMoveTimerMax = .1f;
+        gridMoveTimerMax = 0.09f;
         gridMoveTimer = gridMoveTimerMax;
        // gridMoveDirection = Direction.Right;
-
+        snakeHeadSpriteRenderer = GetComponent<SpriteRenderer>();
         snakeMovePositionList = new List<SnakeMovePosition>();
         snakeBodySize = 0;
 
@@ -241,17 +250,21 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
     private void Update() {
         if(score >= 25){
             
+            speed = 0.8f;
+        }
+        if(score >= 50){
+            speed = 0.9f;  
+        }
+        if(score >= 100){
             speed = 1f;
         }
-        if(score >= 75){
-            speed = 1.2f;  
-        }
-        if(score >= 250){
-            speed = 1.4f;
-        }
-        if(score >= 500)
+        if(score >= 200)
         {
-            speed = 1.5f;
+            speed = 1.1f;
+        }
+        if(score >= 300)
+        {
+            speed = 1.2f;
         }
         switch (state) {
         case State.Alive:
@@ -262,14 +275,51 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
             else if(isModeJoyStick == true){
                 FindObjectOfType<JoyStickMovement>().SetMoveDirectionFromJoystick();
             }
-            HandleGridMovement();
+            //HandleGridMovement();
             handlePowerups();
+            CheckProximityToFood();
+            CheckProximityToPowerUp();
            
             break;
         case State.Dead:
+        CheckProximityToGameOver();
             break;
         }
     }
+    private void FixedUpdate() {
+    if (state == State.Alive) {
+        HandleGridMovement();
+    }
+}
+
+     private void CheckProximityToFood() {
+        Vector3 foodPosition = levelGrid.foodGridPosition;
+        float distanceToFood = Vector3.Distance(gridPosition, foodPosition);
+        if (distanceToFood < 1.5f) {
+            ChangeSprite(nearFoodHead);
+        } else {
+            ChangeSprite(normalHead);
+        }
+    }
+    private void CheckProximityToPowerUp() {
+        Vector3 powerUpPosition = FindObjectOfType<PowerupManager>().powerUpPosition;
+        float distanceToFood = Vector3.Distance(gridPosition, powerUpPosition);
+        if (distanceToFood < 1.5f && FindAnyObjectByType<PowerupManager>().isPowerupSpawn) {
+            ChangeSprite(nearFoodHead);
+        }
+    }
+    private void CheckProximityToGameOver() {
+        if (state == State.Dead) {
+            ChangeSprite(gameOverHead);
+        } else {
+            ChangeSprite(normalHead);
+        }
+    }
+
+    private void ChangeSprite(Sprite sprite) {
+        snakeHeadSpriteRenderer.sprite = sprite;
+    }
+
     // Handles inputs for keyboard
     private void HandleInput() {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
@@ -395,6 +445,7 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
                 snakeBodySize++;
                 CreateSnakeBodyPart();
                 UpdateScoreUI();
+                ChangeSprite(normalHead);
             }
 
             if (snakeMovePositionList.Count >= snakeBodySize + 1) {
@@ -415,7 +466,79 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirectionVector) - 90);
         }
     }
+    
 
+//     private void HandleGridMovement() {
+//     if (!isMoving) {
+//         gridMoveTimer += Time.deltaTime * speed;
+
+//         if (gridMoveTimer >= gridMoveTimerMax) {
+//             gridMoveTimer -= gridMoveTimerMax;
+
+//             // Update the snake move positions
+//             SnakeMovePosition previousSnakeMovePosition = null;
+//             if (snakeMovePositionList.Count > 0) {
+//                 previousSnakeMovePosition = snakeMovePositionList[0];
+//             }
+
+//             SnakeMovePosition snakeMovePosition = new SnakeMovePosition(previousSnakeMovePosition, gridPosition, gridMoveDirection);
+//             snakeMovePositionList.Insert(0, snakeMovePosition);
+
+//             Vector3 gridMoveDirectionVector;
+//             switch (gridMoveDirection) {
+//             default:
+//             case Direction.Right: gridMoveDirectionVector = new Vector3(+1, 0); break;
+//             case Direction.Left: gridMoveDirectionVector = new Vector3(-1, 0); break;
+//             case Direction.Up: gridMoveDirectionVector = new Vector3(0, +1); break;
+//             case Direction.Down: gridMoveDirectionVector = new Vector3(0, -1); break;
+//             }
+
+//             targetGridPosition = gridPosition + gridMoveDirectionVector;
+//             targetGridPosition = levelGrid.ValidateGridPosition(targetGridPosition);
+
+//             // Start moving towards the target position
+//             isMoving = true;
+//         }
+//     }
+
+//     if (isMoving) {
+//         float moveSpeed = speed * Time.deltaTime / gridMoveTimerMax;
+//         transform.position = Vector3.Lerp(transform.position, targetGridPosition, moveSpeed);
+
+//         if (Vector3.Distance(transform.position, targetGridPosition) < 0.01f) {
+//             transform.position = targetGridPosition;
+//             gridPosition = targetGridPosition;
+//             isMoving = false;
+
+//             // Snake ate food logic
+//             bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
+//             if (snakeAteFood) {
+//                 // Snake ate food, grow body
+//                 audioSource.PlayOneShot(eatSound);
+//                 snakeBodySize++;
+//                 CreateSnakeBodyPart();
+//                 UpdateScoreUI();
+//                 ChangeSprite(normalHead);
+//             }
+
+//             if (snakeMovePositionList.Count >= snakeBodySize + 1) {
+//                 snakeMovePositionList.RemoveAt(snakeMovePositionList.Count - 1);
+//             }
+
+//             UpdateSnakeBodyParts();
+
+//             foreach (SnakeBodyPart snakeBodyPart in snakeBodyPartList) {
+//                 Vector3 snakeBodyPartGridPosition = snakeBodyPart.GetGridPosition();
+//                 if (gridPosition == snakeBodyPartGridPosition && PowerupLifeActive == false) {
+//                     GameOver();
+//                 }
+//             }
+
+//             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(targetGridPosition - gridPosition) - 90);
+//         }
+//     }
+// }
+   
     
     private void CreateSnakeBodyPart() {
         snakeBodyPartList.Add(new SnakeBodyPart(snakeBodyPartList.Count));
@@ -527,6 +650,7 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
         Debug.Log("powerUpLifeActive");
         
         audioSource.PlayOneShot(powerUpSound);
+        particleEffectsLifePowerUp.gameObject.SetActive(true);
         FindObjectOfType<PowerupManager>().DestroyPowerup();
 
         ActivatePowerUpLife();
@@ -552,7 +676,7 @@ private void OnCollisionEnter2D(Collision2D collision) {
 public void GameOver()
 {
    
-    particleEffects.gameObject.SetActive(true);
+    //particleEffects.gameObject.SetActive(true);
 
     state = State.Dead;
     SceneManager.LoadScene("GameOverScene");
@@ -564,12 +688,12 @@ public void UpdateScoreUI()
     if (powerup2XActive)
         {
             score += 10;
-            scoreText.text = "Score: " + score;
+            scoreText.text = "Score:" + score;
         }
         else
         {
             score += 5;
-            scoreText.text = "Score: " + score;
+            scoreText.text = "Score:" + score;
         }
          if (score > PlayerPrefs.GetFloat("HighScore", 0))
     {
@@ -581,7 +705,7 @@ public void UpdateScoreUI()
 }
     public void UpdateHighScoreUI()
     {
-        highScoreText.text = "High Score: " + PlayerPrefs.GetFloat("HighScore", 0);
+        highScoreText.text = "High Score:" + PlayerPrefs.GetFloat("HighScore", 0);
     }
 
     // }
@@ -620,6 +744,7 @@ public void UpdateScoreUI()
     private void DeactivatePowerupLife () 
     {
         PowerupLifeActive = false;
+        particleEffectsLifePowerUp.gameObject.SetActive(false);
         //animator.SetActive(false);
         //animator.SetBool("IsFading", false);
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster"); 
@@ -764,7 +889,6 @@ public void UpdateScoreUI()
         }
 
     }
-
-    
+ 
 }
 

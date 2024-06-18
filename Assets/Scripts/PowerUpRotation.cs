@@ -17,7 +17,7 @@ public class PowerUpRotation : MonoBehaviour
 			transform.Rotate(new Vector3(0f,1f,0f) * Time.deltaTime * this.rotationSpeed);
 		else
 			//transform.Rotate(Vector3.forward * Time.deltaTime * this.rotationSpeed);
-			transform.Rotate(new Vector3(0f,1f,0f) * Time.deltaTime * this.rotationSpeed);
+			transform.Rotate(new Vector3(0f,-1f,0f) * Time.deltaTime * this.rotationSpeed);
 	}
 
 	public void SetRotationSpeed(float speed)

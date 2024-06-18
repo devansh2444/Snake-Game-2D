@@ -55,3 +55,15 @@ TagManager:
   - name: PnePiece2
     uniqueID: 716196337
     locked: 0
+  - name: Monster
+    uniqueID: 224359695
+    locked: 0
+  - name: StartScene1
+    uniqueID: 2474740299
+    locked: 0
+  - name: StartScene2
+    uniqueID: 1709256571
+    locked: 0
+  - name: Logo
+    uniqueID: 62441317
+    locked: 0

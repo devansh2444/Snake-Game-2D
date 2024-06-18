@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,9 @@ public class AudioManager : MonoBehaviour
     
 
     private bool isMuted = false;
+    public Button muteButton;
+    public Button unMuteButton;
+   
    
     private AudioSource audioSource;
     // Start is called before the first frame update
@@ -15,40 +19,49 @@ public class AudioManager : MonoBehaviour
     {
       
         audioSource = GetComponent<AudioSource>(); 
-        bool isMuted = PlayerPrefs.GetInt("IsMuted", 0) == 1;
-        SetAudioState(isMuted);
+        LoadAudioState();
+        UpdateAudioState();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    // Function to set the audio state (muted or unmuted)
-    private void SetAudioState(bool isMuted)
-    {
-        if (isMuted)
-        {
-            // Mute audio
-            AudioListener.volume = 0;
-        }
-        else
-        {
-            // Unmute audio
-            AudioListener.volume = 1;
-        }
-    }
-    // Function to toggle the audio state (muted or unmuted)
     public void ToggleMute()
     {
-        bool isMuted = AudioListener.volume == 0; // Check if audio is currently muted
-
-        // Toggle the mute state
         isMuted = !isMuted;
-
-        // Set the audio state and save it to PlayerPrefs
-        SetAudioState(isMuted);
-        PlayerPrefs.SetInt("IsMuted", isMuted ? 1 : 0);
+        UpdateAudioState();
+        SaveAudioState();
     }
+
+    // public void Mute()
+    // {
+    //     isMuted = true;
+    //     UpdateAudioState();
+    // }
+    // public void UnMute()
+    // {
+    //     isMuted = false;
+    //     UpdateAudioState();
+    // }
+    // Function to set the audio state (muted or unmuted)
+    private void UpdateAudioState()
+    {
+        AudioListener.volume = isMuted ? 0 : 1;
+
+        if(muteButton != null && unMuteButton != null)
+        {
+            muteButton.interactable = !isMuted;
+            unMuteButton.interactable = isMuted;
+        }
+    }
+
+     private void LoadAudioState()
+    {
+        isMuted = PlayerPrefs.GetInt("IsMuted", 0) == 1;
+    }
+
+    private void SaveAudioState()
+    {
+        PlayerPrefs.SetInt("IsMuted", isMuted ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+    
 }
     

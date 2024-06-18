@@ -16,17 +16,14 @@ public class SettingManager : MonoBehaviour
     public GameObject backArrowButtonForControlScreen;
     public GameObject backArrowButtonForAudioScreen;
     public GameObject backArrowButtonForLevelScreen;
-    public GameObject pauseMenuPanel;
-        private AudioSource audioSource;
-
-
-    public AudioClip clickAudioClip;
-    
+    public GameObject pauseMenuPanelCanvas;
+    public GameObject settingMenuCanvas;
+    private AudioSource audioSource;
     public Button controllerButton;
     public Button joysticButton;
     public Button swipeButton;
     public GameObject pauseButton;
-
+ 
     public Button simpleLevelButton;
     public Button wallsLevelButton;
     // Sprites for different button states (normal, pressed, etc.)
@@ -43,12 +40,20 @@ public class SettingManager : MonoBehaviour
     private bool isSwipeMode;
     private bool isSimple;
     private bool isWall;
+    public GameObject warningText;
+     public GameObject yes;
+    public GameObject no;
+    public GameObject restart;
+    public GameObject resume;
+    public GameObject quit;
     // Define events for settings changes
     public delegate void ControlSettingsChanged(bool isMode, bool isModeJoyStick, bool isSwipeMode);
     public static event ControlSettingsChanged OnControlSettingsChanged;
 
     public delegate void LevelSettingsChanged(bool isSimple, bool isWall);
     public static event LevelSettingsChanged OnLevelSettingsChanged;
+    public GameObject pausedBg;
+    public GameObject exitBg;
     
 
     private void SaveControlSettings(bool isMode, bool isModeJoyStick, bool isSwipeMode)
@@ -144,7 +149,8 @@ public class SettingManager : MonoBehaviour
     public void SettingsButton()
     {
         PlayClickSound();
-        pauseMenuPanel.gameObject.SetActive(false);
+        pauseMenuPanelCanvas.gameObject.SetActive(false);
+        settingMenuCanvas.gameObject.SetActive(true);
         settingButton.gameObject.SetActive(false);
         settingscreen.gameObject.SetActive(true);
         returnButton.gameObject.SetActive(true);
@@ -188,8 +194,8 @@ public class SettingManager : MonoBehaviour
     {
         PlayClickSound(); 
          
-        FindObjectOfType<AudioManager>().ToggleMute();
-        FindObjectOfType<SpriteManager1>().ToggleUiSprite(); 
+        // FindObjectOfType<AudioManager>().ToggleMute();
+        // FindObjectOfType<SpriteManager1>().ToggleUiSprite(); 
           
       
     }
@@ -199,10 +205,37 @@ public class SettingManager : MonoBehaviour
         PlayClickSound();
     }
 
-    public void QuitGame()
+    public void CheckForQuitGame()
     {
-        Debug.Log("Application Quited");
+        PlayClickSound();
+        warningText.gameObject.SetActive(true);
+        yes.gameObject.SetActive(true);
+        no.gameObject.SetActive(true);
+        restart.gameObject.SetActive(false);
+        resume.gameObject.SetActive(false);
+        quit.gameObject.SetActive(false);
+        settingButton.gameObject.SetActive(false);
+        exitBg.SetActive(true);
+        pausedBg.SetActive(false);
+        
+    }
+    public void YesToQuit()
+    {
+        PlayClickSound();
         Application.Quit();
+    }
+    public void NoToQuit()
+    {
+        PlayClickSound();
+        warningText.gameObject.SetActive(false);
+        yes.gameObject.SetActive(false);
+        no.gameObject.SetActive(false);
+        restart.gameObject.SetActive(true);
+        resume.gameObject.SetActive(true);
+        quit.gameObject.SetActive(true);
+        settingButton.gameObject.SetActive(true);
+        exitBg.SetActive(false);
+        pausedBg.SetActive(true);
     }
 
     
@@ -210,7 +243,8 @@ public class SettingManager : MonoBehaviour
     {
         PlayClickSound();
         settingscreen.gameObject.SetActive(false);
-        pauseMenuPanel.gameObject.SetActive(true);
+        settingMenuCanvas.gameObject.SetActive(false);
+        pauseMenuPanelCanvas.gameObject.SetActive(true);
         settingButton.gameObject.SetActive(true);
         returnButton.gameObject.SetActive(false);
         // pauseButton.gameObject.SetActive(true);
@@ -350,7 +384,7 @@ public class SettingManager : MonoBehaviour
         if (audioSource.clip != null)
         {
         // Play the click sound
-        audioSource.PlayOneShot(clickAudioClip);
+        audioSource.PlayOneShot(audioSource.clip);
         }
     }
 }

@@ -13,8 +13,10 @@ public class PowerupManager : MonoBehaviour
     public float minPowerupDuration = 5f;
     public float maxPowerupDuration = 7f;
     private bool isGameActive = true;
+    public bool isPowerupSpawn = false;
 
     private GameObject currentPowerup;
+    public Vector3 powerUpPosition;
 
     private void Start()
     {
@@ -51,6 +53,8 @@ public class PowerupManager : MonoBehaviour
         float y = Random.Range(bounds.min.y, bounds.max.y);
 
         currentPowerup = Instantiate(powerupPrefab, new Vector3(x, y, 0.0f), Quaternion.identity);
+        powerUpPosition = currentPowerup.transform.position;
+        isPowerupSpawn = true;
     }
 
     public void DestroyPowerup()
@@ -59,6 +63,7 @@ public class PowerupManager : MonoBehaviour
         if (currentPowerup != null)
         {
             Destroy(currentPowerup);
+            isPowerupSpawn = false;
             //Debug.Log("Destroyed");
         }
     }

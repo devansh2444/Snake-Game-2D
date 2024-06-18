@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-   [SerializeField] public GameObject PauseMenuPanel;
+   [SerializeField] public GameObject PauseMenuPanelCanvas;
    public GameObject pauseButton;
    public GameObject settingButton;
    private AudioSource audioSource;
+     public GameObject pausedBg;
+     public GameObject score;
+     public GameObject highscore;
+
   
 
     private void Start() 
@@ -21,28 +25,34 @@ public class PauseMenu : MonoBehaviour
    public void Pause () 
    {
         pauseButton.SetActive(false);
-        PauseMenuPanel.SetActive(true);
+        PauseMenuPanelCanvas.SetActive(true);
         settingButton.SetActive(true);
         Time.timeScale = 0;
         PlayClickSound();
-
+        pausedBg.SetActive(true);
+        score.SetActive(false);
+        highscore.SetActive(false);
    }
 
    public void Resume () 
    {
         pauseButton.SetActive(true);
-        PauseMenuPanel.SetActive(false); 
+        PauseMenuPanelCanvas.SetActive(false); 
+         score.SetActive(true);
+        highscore.SetActive(true);
         settingButton.SetActive(false);
         Time.timeScale = 1;
         //GameStateManager.LoadGameState(FindObjectOfType<Snake>());
         PlayClickSound();
    }
 
+   
    public void Restart () 
    {
-        PlayClickSound();
+        
         Time.timeScale = 1;
         SceneManager.LoadScene("MainScene");
+        PlayClickSound();
    }
    public void GoToStartMenu()
     {

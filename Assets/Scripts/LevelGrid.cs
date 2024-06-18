@@ -13,12 +13,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CodeMonkey;
+// using CodeMonkey;
 using UnityEngine.UIElements;
 
 public class LevelGrid {
 
-    private Vector3 foodGridPosition;
+    public Vector3 foodGridPosition;
     private GameObject foodGameObject;
     private float width;
     private float height;

@@ -7,6 +7,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR;
 
 
 public class Snake : MonoBehaviour {
@@ -49,7 +50,7 @@ public class Snake : MonoBehaviour {
     private int snakeBodySize;
     private List<SnakeMovePosition> snakeMovePositionList;
     private List<SnakeBodyPart> snakeBodyPartList;
-    //public BoxCollider2D foodSpawn;
+   
     public float score;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
@@ -78,8 +79,9 @@ public class Snake : MonoBehaviour {
     private SpriteRenderer snakeHeadSpriteRenderer;
 
     private Vector3 targetGridPosition;
-private bool isMoving = false;
     
+    
+
     
     public void Setup(LevelGrid levelGrid) {
         this.levelGrid = levelGrid;
@@ -96,9 +98,10 @@ private bool isMoving = false;
          // Subscribe to the event for control settings changes
         SettingManager.OnControlSettingsChanged += UpdateControlSettings;
         SettingManager.OnLevelSettingsChanged += UpdateLevelSettings;
+        
         LoadControlSettings();
         LoadLevelSettings();
-        speed = 0.7f;
+        speed = 0.9f;
         audioSource = GameObject.Find("Snake").GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         bool isMode = intToBool(PlayerPrefs.GetInt("IsMode"));
@@ -250,21 +253,21 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
     private void Update() {
         if(score >= 25){
             
-            speed = 0.8f;
-        }
-        if(score >= 50){
-            speed = 0.9f;  
-        }
-        if(score >= 100){
             speed = 1f;
         }
-        if(score >= 200)
-        {
-            speed = 1.1f;
+        if(score >= 50){
+            speed = 1.5f;  
         }
-        if(score >= 300)
+        if(score >= 75){
+            speed = 1.7f;
+        }
+        if(score >= 100)
         {
-            speed = 1.2f;
+            speed = 1.9f;
+        }
+        if(score >= 125)
+        {
+            speed = 2f;
         }
         switch (state) {
         case State.Alive:
@@ -275,7 +278,7 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
             else if(isModeJoyStick == true){
                 FindObjectOfType<JoyStickMovement>().SetMoveDirectionFromJoystick();
             }
-            //HandleGridMovement();
+            HandleGridMovement();
             handlePowerups();
             CheckProximityToFood();
             CheckProximityToPowerUp();
@@ -288,8 +291,10 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
     }
     private void FixedUpdate() {
     if (state == State.Alive) {
-        HandleGridMovement();
+       // HandleGridMovement();
+        CheckCollision();
     }
+    
 }
 
      private void CheckProximityToFood() {
@@ -428,16 +433,18 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
             Vector3 gridMoveDirectionVector;
             switch (gridMoveDirection) {
             default:
-            case Direction.Right:   gridMoveDirectionVector = new Vector3(+1, 0); break;
-            case Direction.Left:    gridMoveDirectionVector = new Vector3(-1, 0); break;
-            case Direction.Up:      gridMoveDirectionVector = new Vector3(0, +1); break;
-            case Direction.Down:    gridMoveDirectionVector = new Vector3(0, -1); break;
+            case Direction.Right:   gridMoveDirectionVector = new Vector3(+0.5f, 0); break;
+            case Direction.Left:    gridMoveDirectionVector = new Vector3(-0.5f, 0); break;
+            case Direction.Up:      gridMoveDirectionVector = new Vector3(0, +0.5f); break;
+            case Direction.Down:    gridMoveDirectionVector = new Vector3(0, -0.5f); break;
             }
 
             gridPosition += gridMoveDirectionVector;
 
             gridPosition = levelGrid.ValidateGridPosition(gridPosition);
-           
+
+        
+          
             bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
             if (snakeAteFood) {
                 // Snake ate food, grow body
@@ -454,91 +461,29 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
 
             UpdateSnakeBodyParts();
 
-            foreach (SnakeBodyPart snakeBodyPart in snakeBodyPartList) {
-                Vector3 snakeBodyPartGridPosition = snakeBodyPart.GetGridPosition();
-                if (gridPosition == snakeBodyPartGridPosition && PowerupLifeActive == false)
-                {
-                    GameOver();    
-                }
-            }
+            // foreach (SnakeBodyPart snakeBodyPart in snakeBodyPartList) {
+            //     Vector3 snakeBodyPartGridPosition = snakeBodyPart.GetGridPosition();
+            //     if (gridPosition == snakeBodyPartGridPosition && PowerupLifeActive == false)
+            //     {
+            //         GameOver();    
+            //     }
+            // }
 
             transform.position = new Vector3(gridPosition.x, gridPosition.y);
             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirectionVector) - 90);
         }
     }
-    
 
-//     private void HandleGridMovement() {
-//     if (!isMoving) {
-//         gridMoveTimer += Time.deltaTime * speed;
-
-//         if (gridMoveTimer >= gridMoveTimerMax) {
-//             gridMoveTimer -= gridMoveTimerMax;
-
-//             // Update the snake move positions
-//             SnakeMovePosition previousSnakeMovePosition = null;
-//             if (snakeMovePositionList.Count > 0) {
-//                 previousSnakeMovePosition = snakeMovePositionList[0];
-//             }
-
-//             SnakeMovePosition snakeMovePosition = new SnakeMovePosition(previousSnakeMovePosition, gridPosition, gridMoveDirection);
-//             snakeMovePositionList.Insert(0, snakeMovePosition);
-
-//             Vector3 gridMoveDirectionVector;
-//             switch (gridMoveDirection) {
-//             default:
-//             case Direction.Right: gridMoveDirectionVector = new Vector3(+1, 0); break;
-//             case Direction.Left: gridMoveDirectionVector = new Vector3(-1, 0); break;
-//             case Direction.Up: gridMoveDirectionVector = new Vector3(0, +1); break;
-//             case Direction.Down: gridMoveDirectionVector = new Vector3(0, -1); break;
-//             }
-
-//             targetGridPosition = gridPosition + gridMoveDirectionVector;
-//             targetGridPosition = levelGrid.ValidateGridPosition(targetGridPosition);
-
-//             // Start moving towards the target position
-//             isMoving = true;
-//         }
-//     }
-
-//     if (isMoving) {
-//         float moveSpeed = speed * Time.deltaTime / gridMoveTimerMax;
-//         transform.position = Vector3.Lerp(transform.position, targetGridPosition, moveSpeed);
-
-//         if (Vector3.Distance(transform.position, targetGridPosition) < 0.01f) {
-//             transform.position = targetGridPosition;
-//             gridPosition = targetGridPosition;
-//             isMoving = false;
-
-//             // Snake ate food logic
-//             bool snakeAteFood = levelGrid.TrySnakeEatFood(gridPosition);
-//             if (snakeAteFood) {
-//                 // Snake ate food, grow body
-//                 audioSource.PlayOneShot(eatSound);
-//                 snakeBodySize++;
-//                 CreateSnakeBodyPart();
-//                 UpdateScoreUI();
-//                 ChangeSprite(normalHead);
-//             }
-
-//             if (snakeMovePositionList.Count >= snakeBodySize + 1) {
-//                 snakeMovePositionList.RemoveAt(snakeMovePositionList.Count - 1);
-//             }
-
-//             UpdateSnakeBodyParts();
-
-//             foreach (SnakeBodyPart snakeBodyPart in snakeBodyPartList) {
-//                 Vector3 snakeBodyPartGridPosition = snakeBodyPart.GetGridPosition();
-//                 if (gridPosition == snakeBodyPartGridPosition && PowerupLifeActive == false) {
-//                     GameOver();
-//                 }
-//             }
-
-//             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(targetGridPosition - gridPosition) - 90);
-//         }
-//     }
-// }
-   
+    private void CheckCollision() {
+        // Check for collision with body parts
+        foreach (SnakeBodyPart snakeBodyPart in snakeBodyPartList) {
+            if (gridPosition == snakeBodyPart.GetGridPosition() && !PowerupLifeActive) {
+                GameOver();
+                
+                return;
+            }
+        }
+    }
     
     private void CreateSnakeBodyPart() {
         snakeBodyPartList.Add(new SnakeBodyPart(snakeBodyPartList.Count));
@@ -595,10 +540,7 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
                     DeactivatePowerup2X();
                     // PowerupLifeActive = false;
                     DeactivatePowerupLife();
-                    //Debug.Log("PowerUpDeactivated");
-                    // Stop the blinking coroutine and reset the snake's sprites
-                    //StopCoroutine(BlinkSnake());
-                    //ResetSnakeSprites();
+                    
                     powerUpDurationText.enabled = false;
                 }
             }
@@ -620,19 +562,6 @@ Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") |
         
         
         UpdateScoreUI();
-
-        
-
-        // // Update and save high score if necessary
-        // if (score > PlayerPrefs.GetFloat("HighScore", 0))
-        // {
-        //     PlayerPrefs.SetFloat("HighScore", score);
-        //     UpdateHighScoreUI();
-        // }
-
-        // Other existing food collision logic...
-
-        // Exit the function to avoid executing power-up collision logic for food collisions
         return;
     }
 
@@ -758,8 +687,6 @@ public void UpdateScoreUI()
         }
         
     }
-
-
 
 
     /*
@@ -891,4 +818,3 @@ public void UpdateScoreUI()
     }
  
 }
-

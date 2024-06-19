@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 189488459}
   - component: {fileID: 189488461}
   - component: {fileID: 189488460}
+  - component: {fileID: 189488462}
   m_Layer: 5
   m_Name: Warning
   m_TagString: Untagged
@@ -430,6 +431,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189488458}
   m_CullTransparentMesh: 1
+--- !u!95 &189488462
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189488458}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 227670356805a4b44acb56ef6831f8ca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &192299280
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,6 +1466,8 @@ MonoBehaviour:
   warningText: {fileID: 189488458}
   yes: {fileID: 697045573}
   no: {fileID: 1092300142}
+  animator: {fileID: 192299283}
+  animationTriggerName: New Trigger
   clickAudioClip: {fileID: 8300000, guid: 52104bc3637e70540be457e0ba1ba9cd, type: 3}
 --- !u!114 &1173193888
 MonoBehaviour:

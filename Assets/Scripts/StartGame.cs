@@ -15,6 +15,9 @@ public class StartGame : MonoBehaviour
     public GameObject yes;
     public GameObject no;
 
+     public Animator animator;
+    public string animationTriggerName;
+
 
 
     private AudioSource audioSource;
@@ -68,7 +71,13 @@ public class StartGame : MonoBehaviour
         quit.gameObject.SetActive(true);
     }
 
-
+ public void TriggerAnimation()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger(animationTriggerName);
+        }
+    }
     
     private void PlayClickSound()
     {

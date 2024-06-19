@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6f60c125029bf2045afbc5cbdbe1823a
+guid: 98d9a9d76e61a6c468a4e50ccbfa274d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,34 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: snake_head_0_13
-      rect:
-        serializedVersion: 2
-        x: 360
-        y: 198
-        width: 60
-        height: 121
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e43cad5f7997bfa48b7dac80a67bc15f
-      internalID: -1408551365
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snake_head_0_23
+      name: Untitled-45_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 18
-        width: 60
-        height: 123
+        y: 4800
+        width: 1969
+        height: 1975
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +150,83 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c7cf24dd1b6f6741b12541c7f70682e
-      internalID: -942145031
+      spriteID: 350543034982c004d96737f4fc1a73d9
+      internalID: -1500230691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: snake_head_0_0
+      name: Untitled-45_1
+      rect:
+        serializedVersion: 2
+        x: 2518
+        y: 4818
+        width: 1972
+        height: 1957
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f5eee0f5b9792c40bdcb0acccf9fa70
+      internalID: 1275102015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled-45_2
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 4426
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75c51c51cd294584d8a41ae0286852fe
+      internalID: 621437068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled-45_3
+      rect:
+        serializedVersion: 2
+        x: 2260
+        y: 2438
+        width: 2011
+        height: 2011
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 103fd9cd42dc634419e59347c768e6b4
+      internalID: -1877538872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled-45_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 212
-        width: 58
-        height: 124
+        y: 2377
+        width: 1968
+        height: 2031
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,20 +234,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7c98f45bf949b0418537ab04780d0a6
-      internalID: 2129753221
+      spriteID: 6929977ddbfe0814f82fca545caebb5e
+      internalID: 2145953261
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: snake_head_0_1
+      name: Untitled-45_5
       rect:
         serializedVersion: 2
-        x: 63
-        y: 212
-        width: 56
-        height: 125
+        x: 4268
+        y: 3334
+        width: 222
+        height: 181
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +255,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14b1a213f1b34774a8ff3a169ce87229
-      internalID: 1447880041
+      spriteID: 3f3904b9a72619344bcb329e4d9b0de1
+      internalID: -1846066035
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: snake_head_0_2
+      name: Untitled-45_6
       rect:
         serializedVersion: 2
-        x: 122
-        y: 211
-        width: 57
-        height: 127
+        x: 917
+        y: 2418
+        width: 16
+        height: 4
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,20 +276,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64cb060152ee83640ae99a35918a437e
-      internalID: 2098883290
+      spriteID: bf0662cebc70a7b4ea6ca29dab066eb4
+      internalID: -1946147848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: snake_head_0_3
+      name: Untitled-45_7
       rect:
         serializedVersion: 2
-        x: 180
-        y: 212
-        width: 59
-        height: 125
+        x: 1013
+        y: 2418
+        width: 6
+        height: 4
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,20 +297,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f069baeb0a28c99478c03a40073f1ca1
-      internalID: 525349616
+      spriteID: a87fcb86c0a49bf4492aca8d9b427a52
+      internalID: -248461821
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: snake_head_0_4
+      name: Untitled-45_8
       rect:
         serializedVersion: 2
-        x: 240
-        y: 212
-        width: 59
-        height: 124
+        x: 1033
+        y: 2418
+        width: 6
+        height: 4
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,20 +318,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9422e506e844243438872951c0e65d15
-      internalID: -578248128
+      spriteID: 024e04dbba069f54c8165d6a1586c748
+      internalID: 325233270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: snake_head_0_5
+      name: Untitled-45_9
       rect:
         serializedVersion: 2
-        x: 300
-        y: 213
-        width: 59
-        height: 124
+        x: 2518
+        y: 0
+        width: 1972
+        height: 1966
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,134 +339,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a363cd9060ec03c4eaf8ad9e7d186d18
-      internalID: -405051243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snake_head_0_6
-      rect:
-        serializedVersion: 2
-        x: 61
-        y: 34
-        width: 58
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 84d736e434241d24592da2721fcfa58f
-      internalID: -1870499005
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snake_head_0_7
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 35
-        width: 59
-        height: 107
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1596a98f5581c04fb44f9246e1c8b74
-      internalID: -565337247
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snake_head_0_8
-      rect:
-        serializedVersion: 2
-        x: 180
-        y: 36
-        width: 60
-        height: 105
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d948209b835e76439b1e21219702389
-      internalID: 1403025080
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snake_head_0_9
-      rect:
-        serializedVersion: 2
-        x: 241
-        y: 36
-        width: 58
-        height: 105
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4ffd2b87024c45e4cb1cf65d3f2846ac
-      internalID: -1095513125
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snake_head_0_10
-      rect:
-        serializedVersion: 2
-        x: 302
-        y: 33
-        width: 56
-        height: 106
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a2f7e0bcd560cd4f8d01ed7c5f40649
-      internalID: -897455816
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snake_head_0_11
-      rect:
-        serializedVersion: 2
-        x: 361
-        y: 35
-        width: 57
-        height: 104
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f173b388d1740784e918d4d49059c42a
-      internalID: 1703463681
+      spriteID: d6278d9a7feaa144db97f12f2529d23a
+      internalID: 1268883021
       vertices: []
       indices: 
       edges: []
@@ -440,31 +356,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      snake_head_0_0: 2129753221
-      snake_head_0_1: 1447880041
-      snake_head_0_10: -897455816
-      snake_head_0_11: 1703463681
-      snake_head_0_12: -1178300524
-      snake_head_0_13: -1408551365
-      snake_head_0_14: -152413784
-      snake_head_0_15: -550784702
-      snake_head_0_16: 1983797183
-      snake_head_0_17: 2010476345
-      snake_head_0_18: 745836088
-      snake_head_0_19: -985048982
-      snake_head_0_2: 2098883290
-      snake_head_0_20: 1313540573
-      snake_head_0_21: 33170090
-      snake_head_0_22: 1587397742
-      snake_head_0_23: -942145031
-      snake_head_0_24: -679520648
-      snake_head_0_3: 525349616
-      snake_head_0_4: -578248128
-      snake_head_0_5: -405051243
-      snake_head_0_6: -1870499005
-      snake_head_0_7: -565337247
-      snake_head_0_8: 1403025080
-      snake_head_0_9: -1095513125
+      Untitled-45_0: -1500230691
+      Untitled-45_1: 1275102015
+      Untitled-45_2: 621437068
+      Untitled-45_3: -1877538872
+      Untitled-45_4: 2145953261
+      Untitled-45_5: -1846066035
+      Untitled-45_6: -1946147848
+      Untitled-45_7: -248461821
+      Untitled-45_8: 325233270
+      Untitled-45_9: 1268883021
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

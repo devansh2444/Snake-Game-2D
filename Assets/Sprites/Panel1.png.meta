@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 41cd93e71fd63fa4ab7ab1f13fbf81de
+guid: 858a0e91a1367244ebf5e6e1e4b0c23c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -134,49 +134,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: snake_parts_0_0
-      rect:
-        serializedVersion: 2
-        x: 12
-        y: 0
-        width: 60
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8469ce740e331f448a0d1c47339e03f6
-      internalID: 595388467
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snake_parts_0_1
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 0
-        width: 57
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce66bb22b06519b42b1050a6a5fbebe5
-      internalID: 943738047
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -187,9 +145,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      snake_parts_0_0: 595388467
-      snake_parts_0_1: 943738047
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

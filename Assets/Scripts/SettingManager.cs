@@ -41,7 +41,7 @@ public class SettingManager : MonoBehaviour
     private bool isSimple;
     private bool isWall;
     public GameObject warningText;
-     public GameObject yes;
+    public GameObject yes;
     public GameObject no;
     public GameObject restart;
     public GameObject resume;
@@ -54,6 +54,7 @@ public class SettingManager : MonoBehaviour
     public static event LevelSettingsChanged OnLevelSettingsChanged;
     public GameObject pausedBg;
     public GameObject exitBg;
+    public GameObject settingBg;
     
 
     private void SaveControlSettings(bool isMode, bool isModeJoyStick, bool isSwipeMode)
@@ -159,6 +160,7 @@ public class SettingManager : MonoBehaviour
     public void ControlButton () 
     {
         PlayClickSound();
+        settingBg.gameObject.SetActive(false);
         settingscreen.gameObject.SetActive(false);
         controls.gameObject.SetActive(true);
         returnButton.gameObject.SetActive(false);
@@ -170,6 +172,7 @@ public class SettingManager : MonoBehaviour
     public void AudioButton()
     {
         PlayClickSound();
+        settingBg.gameObject.SetActive(false);
         settingscreen.gameObject.SetActive(false);
         audioSetting.gameObject.SetActive(true);
         returnButton.gameObject.SetActive(false);
@@ -182,6 +185,7 @@ public class SettingManager : MonoBehaviour
     public void LevelSettingsButton()
     {
         PlayClickSound();
+        settingBg.gameObject.SetActive(false);
         settingscreen.gameObject.SetActive(false);
         levelSetting.gameObject.SetActive(true);
         returnButton.gameObject.SetActive(false);
@@ -255,6 +259,7 @@ public class SettingManager : MonoBehaviour
     public void ReturnButtonForControlScreen()
     {
         PlayClickSound();
+        settingBg.gameObject.SetActive(true);
         settingscreen.gameObject.SetActive(true);
         controls.gameObject.SetActive(false);
         backArrowButtonForControlScreen.gameObject.SetActive(false);
@@ -265,6 +270,7 @@ public class SettingManager : MonoBehaviour
     public void ReturnButtonForAudioScreen()
     {
         PlayClickSound();
+         settingBg.gameObject.SetActive(true);
         settingscreen.gameObject.SetActive(true);
         audioSetting.gameObject.SetActive(false);
         backArrowButtonForAudioScreen.SetActive(false);
@@ -274,6 +280,7 @@ public class SettingManager : MonoBehaviour
     public void ReturnButtonForLevelScreen()
     {
         PlayClickSound();
+         settingBg.gameObject.SetActive(true);
         settingscreen.gameObject.SetActive(true);
         levelSetting.gameObject.SetActive(false);
         backArrowButtonForLevelScreen.gameObject.SetActive(false);

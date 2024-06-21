@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 public class StartGame : MonoBehaviour
 {
     public GameObject logo;
@@ -14,7 +15,7 @@ public class StartGame : MonoBehaviour
     public GameObject warningText;
     public GameObject yes;
     public GameObject no;
-
+    public TextMeshProUGUI coinText;
      public Animator animator;
     public string animationTriggerName;
 
@@ -30,8 +31,9 @@ public class StartGame : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-      
-
+        // Update coin count UI at the start
+        UpdateCoinUI();
+    
     }
     // Update is called once per frame
     void Update()
@@ -87,5 +89,10 @@ public class StartGame : MonoBehaviour
         // Play the click sound
         audioSource.PlayOneShot(clickAudioClip);
         }
+    }
+    private void UpdateCoinUI()
+    {
+        coinText.text = "Coins: " + PlayerPrefs.GetInt("CoinCount");
+
     }
 }

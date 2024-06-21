@@ -12,6 +12,7 @@ TagManager:
   - FoodSpawnArea
   - Food
   - StartGame
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -49,10 +50,10 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: OnePiece
+  - name: Snake
     uniqueID: 1138410497
     locked: 0
-  - name: PnePiece2
+  - name: Body
     uniqueID: 716196337
     locked: 0
   - name: Monster
@@ -66,4 +67,7 @@ TagManager:
     locked: 0
   - name: Logo
     uniqueID: 62441317
+    locked: 0
+  - name: Canvas
+    uniqueID: 3410899695
     locked: 0

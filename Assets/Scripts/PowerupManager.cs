@@ -6,6 +6,7 @@ public class PowerupManager : MonoBehaviour
 {
     public GameObject powerupPrefab2X;
     public GameObject powerupPrefabLife;
+    public GameObject coin;
     
     public BoxCollider2D powerupSpawnArea;
     public float minSpawnInterval = 5f;
@@ -32,10 +33,13 @@ public class PowerupManager : MonoBehaviour
             if (isGameActive)
             {
                 // Randomly choose which powerup to spawn
-                if (Random.Range(0f, 1f) < 0.5f)
+                float randomValue = Random.Range(0f,1f);
+                if (randomValue< 0.33f)
                     SpawnPowerup(powerupPrefab2X);
-                else
+                else if(randomValue < 0.66)
                     SpawnPowerup(powerupPrefabLife);
+                else
+                    SpawnPowerup(coin);   
 
                 float powerupDuration = Random.Range(minPowerupDuration, maxPowerupDuration);
                 yield return new WaitForSeconds(powerupDuration);
@@ -84,6 +88,11 @@ public class PowerupManager : MonoBehaviour
                 {
                     // Handle life powerup collision
                     // For example, increase the player's lives
+                }
+                else if (currentPowerup.CompareTag("Powerup"))
+                {
+                    // Handle speed powerup collision
+                    // For example, increase the player's speed
                 }
             }
 

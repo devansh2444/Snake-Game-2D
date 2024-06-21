@@ -1,0 +1,1121 @@
+fileFormatVersion: 2
+guid: e627f733181a3d341a3bc3204407f9fa
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_0
+      rect:
+        serializedVersion: 2
+        x: 1374
+        y: 1572
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9ab69001f277d24482c9d529c39e2dd
+      internalID: -832929008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_1
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 1574
+        width: 84
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6d60bf79100f184087d05d6a3ca4f6a
+      internalID: -1009417507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_2
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 1446
+        width: 1648
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a57bc35037a80fe4cac8172a42fdda27
+      internalID: -1777055767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_3
+      rect:
+        serializedVersion: 2
+        x: 1806
+        y: 1532
+        width: 18
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0b2f9ecf09396d4f8b9fc1b49aa1c9b
+      internalID: -278168285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_4
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 1524
+        width: 48
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a7cca7564fb357418e90809f4f8f2ee
+      internalID: -665992380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_5
+      rect:
+        serializedVersion: 2
+        x: 1826
+        y: 1446
+        width: 4
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccf637aba8d038f4c910e88fdd2d7d62
+      internalID: 1968347271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_6
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 1404
+        width: 252
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c9c5e7af4873a844b03cc9a9cc52b88
+      internalID: -993542113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_7
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 1410
+        width: 90
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa4c1cc7e0292e84894db6da548be262
+      internalID: 583053976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_8
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 1410
+        width: 102
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af669b74a0becb44a93f6175cbe809d5
+      internalID: -825665946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_9
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 1410
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49a0ebed4f41bb541bd11de6e13abaa1
+      internalID: -1243322989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_10
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 1410
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f699ff6d76462da4eb6f1dd1164809fc
+      internalID: -1997876957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_11
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 1404
+        width: 90
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c65fca9ba6ad4e74e85405d6106f6d0b
+      internalID: -1545227695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_12
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 1404
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecdb749cfc5fc2f40a40c4903f53df6e
+      internalID: 987154418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_13
+      rect:
+        serializedVersion: 2
+        x: 1596
+        y: 1321
+        width: 90
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fe1d3642de6a2347add1af421f3b5ef
+      internalID: -998520489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_14
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 1156
+        width: 1732
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acd929749fbdf604ea4b0daea8885b95
+      internalID: -1079812329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_15
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 1310
+        width: 90
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83c7fa024ba09c54492e36c17e4d5314
+      internalID: 1288078383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_16
+      rect:
+        serializedVersion: 2
+        x: 1494
+        y: 1284
+        width: 192
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31771cc670adc8643ba52ccceff41520
+      internalID: -561479079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_17
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 1170
+        width: 4
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c8f9bc5357b18e4eaa68857057805b1
+      internalID: 334298241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_18
+      rect:
+        serializedVersion: 2
+        x: 1866
+        y: 1188
+        width: 6
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0eae512cb80c4be4baf75f8067cad014
+      internalID: 1702694274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_19
+      rect:
+        serializedVersion: 2
+        x: 1866
+        y: 1176
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5800cf7f6ded58f459a0ed8f950c9045
+      internalID: 929814271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_20
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 1122
+        width: 102
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a03a18d3348587641a471f41a3e5f46c
+      internalID: 2061476038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_21
+      rect:
+        serializedVersion: 2
+        x: 1302
+        y: 1062
+        width: 90
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 412115c9473d46b4e85feae6252c0695
+      internalID: 355786868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_22
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 1062
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be10e7183c8bcea4ea20db5b5761594e
+      internalID: -989103457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_23
+      rect:
+        serializedVersion: 2
+        x: 1596
+        y: 1062
+        width: 96
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95889cb0e9be76d4fae90fb8b5f3237b
+      internalID: 1246076011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_24
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 886
+        width: 1686
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cff863eff3a88b04f9a3f2e3a7f16677
+      internalID: 619745234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_25
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 1025
+        width: 43
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24a3b493733f71f42bba2403296565da
+      internalID: -865456531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_26
+      rect:
+        serializedVersion: 2
+        x: 1844
+        y: 942
+        width: 4
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2fe8ff8892a9374283cfb090e7cd970
+      internalID: -2034976048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_27
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 852
+        width: 84
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 744bfefba591ab642928b401715856cf
+      internalID: 1593726276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_28
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 852
+        width: 24
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10befcb2b24255a43a19a6df024ba4c7
+      internalID: -115886647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_29
+      rect:
+        serializedVersion: 2
+        x: 997
+        y: 852
+        width: 8
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48e5c918dc348024e8b136bd25678718
+      internalID: 925097981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_30
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 846
+        width: 85
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4168cad88484d094193633559ce7452e
+      internalID: 922736288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_31
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 852
+        width: 40
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cd8bd3f05ef3484383a06bc7384904f
+      internalID: -1066458337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_32
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 776
+        width: 84
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ebd1959f092b6f49834569fbc8bf1d3
+      internalID: -446884065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_33
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 601
+        width: 1672
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b57be2cd57ffdc245a291f7e8a8bdec1
+      internalID: 677242163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_34
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 636
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f457278228ce034f8733c69d1cfd8d1
+      internalID: 1123919450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_35
+      rect:
+        serializedVersion: 2
+        x: 1836
+        y: 636
+        width: 6
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d028ebf628e58a64a8e4754498023f01
+      internalID: 472361576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_36
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 594
+        width: 18
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c7a21328bd23f54ea4d5bbebfc0b2ee
+      internalID: -1159632961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_37
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 600
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abad552fcfce68d49aec30396bfd1c13
+      internalID: -1870713563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_38
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 594
+        width: 78
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fac80a6fc30a1741959188161c91d90
+      internalID: -1189441827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_39
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 254
+        width: 1756
+        height: 334
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 309da135c62b8e94582e057afa7ebaf5
+      internalID: 52983405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_40
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 572
+        width: 84
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a2cc7befb26bb749bcb510f284721c8
+      internalID: -1504763851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_41
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 564
+        width: 96
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe1a1abece67ccd428d6d70f0ee4621d
+      internalID: 491844973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_42
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 402
+        width: 6
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a22caa208ad05b64bb571de23b96de9b
+      internalID: -68730282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontal-barbed-wire-collection_43
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 252
+        width: 17
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 044daf83f21b8764ea6bf84109a60625
+      internalID: 679136313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      horizontal-barbed-wire-collection_0: -832929008
+      horizontal-barbed-wire-collection_1: -1009417507
+      horizontal-barbed-wire-collection_10: -1997876957
+      horizontal-barbed-wire-collection_11: -1545227695
+      horizontal-barbed-wire-collection_12: 987154418
+      horizontal-barbed-wire-collection_13: -998520489
+      horizontal-barbed-wire-collection_14: -1079812329
+      horizontal-barbed-wire-collection_15: 1288078383
+      horizontal-barbed-wire-collection_16: -561479079
+      horizontal-barbed-wire-collection_17: 334298241
+      horizontal-barbed-wire-collection_18: 1702694274
+      horizontal-barbed-wire-collection_19: 929814271
+      horizontal-barbed-wire-collection_2: -1777055767
+      horizontal-barbed-wire-collection_20: 2061476038
+      horizontal-barbed-wire-collection_21: 355786868
+      horizontal-barbed-wire-collection_22: -989103457
+      horizontal-barbed-wire-collection_23: 1246076011
+      horizontal-barbed-wire-collection_24: 619745234
+      horizontal-barbed-wire-collection_25: -865456531
+      horizontal-barbed-wire-collection_26: -2034976048
+      horizontal-barbed-wire-collection_27: 1593726276
+      horizontal-barbed-wire-collection_28: -115886647
+      horizontal-barbed-wire-collection_29: 925097981
+      horizontal-barbed-wire-collection_3: -278168285
+      horizontal-barbed-wire-collection_30: 922736288
+      horizontal-barbed-wire-collection_31: -1066458337
+      horizontal-barbed-wire-collection_32: -446884065
+      horizontal-barbed-wire-collection_33: 677242163
+      horizontal-barbed-wire-collection_34: 1123919450
+      horizontal-barbed-wire-collection_35: 472361576
+      horizontal-barbed-wire-collection_36: -1159632961
+      horizontal-barbed-wire-collection_37: -1870713563
+      horizontal-barbed-wire-collection_38: -1189441827
+      horizontal-barbed-wire-collection_39: 52983405
+      horizontal-barbed-wire-collection_4: -665992380
+      horizontal-barbed-wire-collection_40: -1504763851
+      horizontal-barbed-wire-collection_41: 491844973
+      horizontal-barbed-wire-collection_42: -68730282
+      horizontal-barbed-wire-collection_43: 679136313
+      horizontal-barbed-wire-collection_5: 1968347271
+      horizontal-barbed-wire-collection_6: -993542113
+      horizontal-barbed-wire-collection_7: 583053976
+      horizontal-barbed-wire-collection_8: -825665946
+      horizontal-barbed-wire-collection_9: -1243322989
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

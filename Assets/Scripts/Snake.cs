@@ -105,8 +105,8 @@ public class Snake : MonoBehaviour {
     
     public void Setup(LevelGrid levelGrid) {
         this.levelGrid = levelGrid;
-        Debug.Log(levelGrid);
-        Debug.Log(levelGrid);
+        // Debug.Log(levelGrid);
+        // Debug.Log(levelGrid);
         
     }
      private bool intToBool(int intValue)
@@ -181,7 +181,7 @@ public class Snake : MonoBehaviour {
     private void LoadControlSettings() 
     {
 
-    Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") || PlayerPrefs.HasKey("IsSwipeMode"));
+    //Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") || PlayerPrefs.HasKey("IsSwipeMode"));
          // Only load control settings if they are not already set
     if (!PlayerPrefs.HasKey("IsMode") || !PlayerPrefs.HasKey("IsModeJoyStick") || !PlayerPrefs.HasKey("IsSwipeMode"))
     {
@@ -599,7 +599,7 @@ public class Snake : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
 {
-    Debug.Log("Trigger Entered");
+    //Debug.Log("Trigger Entered");
 
     if (collision.gameObject.tag == "Food" && !foodBeingConsumed)
     {
@@ -609,7 +609,7 @@ public class Snake : MonoBehaviour {
 
     if (collision.gameObject.tag == "PowerUp")
     {
-        Debug.Log("2xpoerupactive");
+        //Debug.Log("2xpoerupactive");
         audioSource.PlayOneShot(powerUpSound);
         particleEffects2XPowerUp.gameObject.SetActive(true);
         FindObjectOfType<PowerupManager>().DestroyPowerup();
@@ -618,7 +618,7 @@ public class Snake : MonoBehaviour {
     }
     else if (collision.gameObject.tag == "PowerUpLife")
     {
-        Debug.Log("powerUpLifeActive");
+        //Debug.Log("powerUpLifeActive");
         
         audioSource.PlayOneShot(powerUpSound);
         particleEffectsLifePowerUp.gameObject.SetActive(true);
@@ -686,6 +686,7 @@ public void ContinueGame()
     public void UpdateCoinsCollectedUI()
     {
     coinsCollectedText.text = "Coins: " + PlayerPrefs.GetInt("CoinCount");
+    Debug.Log("Collected Coins Snake:" + coinsCollectedText.text);
 
     }
 

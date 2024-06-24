@@ -14,6 +14,7 @@ public class GameOverScript : MonoBehaviour
     public TextMeshProUGUI score;
     public TextMeshProUGUI collectedCoins;
     public GameObject gameoverPanel;
+    public GameObject notEnoughCoinsDialog;  // Dialog box for not enough coins
    
     void Start()
     {
@@ -26,6 +27,7 @@ public class GameOverScript : MonoBehaviour
     {
         
         collectedCoins.text = ": " + GameManager.coinCount.ToString();
+        Debug.Log("Game Over Coins:" + collectedCoins.text);
         score.text = "Score:" + Snake.score.ToString();
     }
 
@@ -44,12 +46,28 @@ public class GameOverScript : MonoBehaviour
 
     public void Continue()
     {
+         Debug.Log("Attempting to Continue...");
+        if(GameManager.coinCount > 0)
+        {
         PlayClickSound();
-        GameManager.LoadGameState();  // Load the saved game state
+        GameManager.AddCoins(-1); // Deduct 1 coin
+        UpdateScoreUI();  // Update UI to reflect the new coin count
+         
+        Debug.Log("Coin Debucted");
+        Debug.Log("Updated Coins:" + GameManager.coinCount);
+        //GameManager.LoadGameState();  // Load the saved game state
         gameoverPanel.SetActive(false);  // Hide the game over panel
-
-        // Find and reset the necessary game components, e.g., the snake
-        Snake.Instance.ContinueGame();
+        Snake.Instance.ContinueGame(); // Continue the game
+        }
+         else
+        {
+            ShowNotEnoughCoinsDialog();  // Show dialog if not enough coins
+        }
+    }
+    private void ShowNotEnoughCoinsDialog()
+    {
+         Debug.Log("Not Enough Coins to Continue");
+        notEnoughCoinsDialog.SetActive(true);
     }
 
     

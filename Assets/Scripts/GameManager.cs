@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     // Load the coin count from PlayerPrefs
     coinCount = PlayerPrefs.GetInt(COIN_COUNT_KEY, 0);
+    Debug.Log("Loaded Coin Count: " + coinCount);
 }
 
 
@@ -28,12 +29,24 @@ public class GameManager : MonoBehaviour
     {
         coinCount += count;
         PlayerPrefs.SetInt(COIN_COUNT_KEY, coinCount);
+        PlayerPrefs.Save();
+        Debug.Log("GameManager Coins after AddCoins: " + coinCount);
     }
+
+    // public static void DeductCoin(int count)
+    // {
+    //     coinCount -= count;
+    //     PlayerPrefs.SetInt(COIN_COUNT_KEY, coinCount);
+    //     PlayerPrefs.Save();
+    //     Debug.Log("Game Manager Coins:" + coinCount);
+    // }
 
     public static void ResetCoins()
     {
         coinCount = 0;
         PlayerPrefs.SetInt(COIN_COUNT_KEY, coinCount);
+        PlayerPrefs.Save();
+        Debug.Log("GameManager Coins after ResetCoins: " + coinCount);
     }
     public static void ResetScore()
     {
@@ -43,13 +56,17 @@ public class GameManager : MonoBehaviour
     {
         
         PlayerPrefs.SetInt("SavedCoinCount", coinCount);
+        PlayerPrefs.Save();
+        Debug.Log("GameManager SaveGameState: SavedCoinCount = " + coinCount);
         // Add other states to save as needed
     }
 
     public static void LoadGameState()
     {
         
-        coinCount = PlayerPrefs.GetInt("SavedCoinCount", 0);
+        //coinCount = PlayerPrefs.GetInt("SavedCoinCount", 0);
+        Debug.Log("GameManager LoadGameState: Loaded SavedCoinCount = " + coinCount);
+        
         // Load other states as needed
     }
 
@@ -58,5 +75,7 @@ public class GameManager : MonoBehaviour
     {
         // Save the coin count when the application quits
         PlayerPrefs.SetInt(COIN_COUNT_KEY, coinCount);
+        PlayerPrefs.Save();
+        Debug.Log("GameManager OnApplicationQuit: Saved Coin Count = " + coinCount);
     }
 }

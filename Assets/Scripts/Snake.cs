@@ -55,7 +55,7 @@ public class Snake : MonoBehaviour
     private int snakeBodySize;
     private List<SnakeMovePosition> snakeMovePositionList;
     private List<SnakeBodyPart> snakeBodyPartList;
-    public float score;
+    public static float score;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
     private Vector2 touchStartPos;

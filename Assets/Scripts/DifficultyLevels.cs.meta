@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/GameManager.cs.meta
+guid: a90f6381a37f4274d92219ab7ef04800
+========
+guid: 7ee9f4df435299e4ea6a2a80f1f7e44e
+>>>>>>>> Dev-K:Assets/Scripts/DifficultyLevels.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

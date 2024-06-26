@@ -59,7 +59,7 @@ public class GameOverScript : MonoBehaviour
         gameoverPanel.SetActive(false);  // Hide the game over panel
         Snake.Instance.ContinueGame(); // Continue the game
         }
-         else
+        else
         {
             ShowNotEnoughCoinsDialog();  // Show dialog if not enough coins
         }

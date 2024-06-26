@@ -30,6 +30,7 @@ public class Snake : MonoBehaviour {
     public GameObject joyStick;
     public GameObject Walls;
     public GameObject snakeBodyPrefab;
+   
     public GameObject particleEffects;
     public GameObject particleEffects2XPowerUp;
     public GameObject particleEffectsLifePowerUp;
@@ -680,7 +681,37 @@ public void ContinueGame()
     highScoreText.gameObject.SetActive(true);
     // Resume any other game logic or states that need to be reset
     UpdateUI();  // Update the UI to reflect the loaded score and other states
+    StartCoroutine(ActivatePowerupLife());
 }
+
+private IEnumerator ActivatePowerupLife()
+    {
+        PowerupLifeActive = true;
+        // Blink effect
+        
+        float blinkDuration = 0.2f; // Duration for each blink
+        float blinkTimer = 0f;
+        SpriteRenderer snakeSpriteRenderer = GetComponent<SpriteRenderer>();
+        while (PowerupLifeActive)
+        {
+            blinkTimer += Time.deltaTime;
+
+            if (blinkTimer >= blinkDuration)
+            {
+                snakeSpriteRenderer.enabled = !snakeSpriteRenderer.enabled; // Toggle visibility
+                
+                blinkTimer = 0f;
+            }
+
+            yield return null;
+        }
+
+        // Ensure the snake is visible at the end of the power-up duration
+        snakeSpriteRenderer.enabled = true;
+        yield return new WaitForSeconds(5f);
+        PowerupLifeActive = false;
+    }
+
 
 
     public void UpdateCoinsCollectedUI()

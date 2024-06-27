@@ -29,7 +29,7 @@ public class Snake : MonoBehaviour
     //     Medium,
     //     High
     // }
-    
+
     public bool powerup2XActive = false;
     private bool PowerupLifeActive = false;
     private Animator animator;
@@ -39,40 +39,21 @@ public class Snake : MonoBehaviour
     public GameObject gmaeAssets;
     public GameObject monsters;
     public GameObject particleEffects;
+    public TextMeshProUGUI coinsCollectedText;
+
     public GameObject particleEffects2XPowerUp;
     public GameObject particleEffectsLifePowerUp;
-    public GameObject gmaeAssets;
-    public GameObject monsters;
-    public GameObject gameoverPanel;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI highScoreText;
-    public TextMeshProUGUI coinsCollectedText;
-    public TextMeshProUGUI powerUpDurationText;
-    public Sprite normalHead;
-    public Sprite nearFoodHead;
-    public Sprite gameOverHead;
     public AudioClip gameOverSound;
     public AudioClip powerUpSound;
     public AudioClip eatSound;
-    
-
-    // Private variables for internal use
-    private State state;
-    private Animator animator;
-     private Direction gridMoveDirection;
-    private Vector3 gridPosition;
-    private float gridMoveTimer;
-    private float gridMoveTimerMax = 0.09f;
-    private List<SnakeBodyPart> snakeBodyPartList;
-    private List<SnakeMovePosition> snakeMovePositionList;
-    private LevelGrid levelGrid;
     private AudioSource audioSource;
-    private SpriteRenderer snakeHeadSpriteRenderer;
-    public static float score;
-    private float powerupDuration = 15f;
-    private float currentPowerupTime;
-    private bool powerup2XActive = false;
-    private bool PowerupLifeActive = false;
+    private State state;
+    public Direction gridMoveDirection;
+    public Vector3 gridPosition;
+    private float gridMoveTimer;
+    private float gridMoveTimerMax;
+    private LevelGrid levelGrid;
+    private float speed;
     private int snakeBodySize;
     private List<SnakeMovePosition> snakeMovePositionList;
     private List<SnakeBodyPart> snakeBodyPartList;
@@ -80,6 +61,7 @@ public class Snake : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
     private Vector2 touchStartPos;
+    public Button pauseButton;
     private bool foodBeingConsumed = false;
     public GameObject leftButton;
     public GameObject rightButton;
@@ -92,20 +74,19 @@ public class Snake : MonoBehaviour
     private bool isSwipeMode;
     private bool isWall;
     private bool isSimple;
-    public static Snake Instance;
     public Sprite normalHead;
     public Sprite nearFoodHead;
     public Sprite gameOverHead;
     private SpriteRenderer snakeHeadSpriteRenderer;
     private Vector3 targetGridPosition;
-   private Vector3 targetGridPositionMax;
-   private Coroutine powerupCoroutine;
-
-   private const string HIGH_SCORE_KEY = "HighScore";
+    private String difficulty;
+    private const string HIGH_SCORE_KEY = "HighScore";
     private const float BASE_SCORE_INCREMENT = 5f;
     private const float SCORE_INCREMENT_2X_POWERUP = 10f;
-    
-    
+    private Coroutine powerupCoroutine;
+    public GameObject gameoverPanel;
+
+
     private static Snake _instance;
 
     public static Snake Instance
@@ -123,14 +104,12 @@ public class Snake : MonoBehaviour
             return _instance;
         }
     }
-    
-
-    
-    public void Setup(LevelGrid levelGrid) {
+    public void Setup(LevelGrid levelGrid)
+    {
         this.levelGrid = levelGrid;
         // Debug.Log(levelGrid);
         // Debug.Log(levelGrid);
-        
+
     }
     private bool intToBool(int intValue)
     {
@@ -144,37 +123,40 @@ public class Snake : MonoBehaviour
         SettingManager.OnControlSettingsChanged += UpdateControlSettings;
         SettingManager.OnLevelSettingsChanged += UpdateLevelSettings;
 
-       
+
 
         LoadControlSettings();
         LoadLevelSettings();
 
-        if(difficulty == "Easy"){
+        if (difficulty == "Easy")
+        {
             speed = 0.9f;
         }
-        else if(difficulty == "Medium"){
+        else if (difficulty == "Medium")
+        {
             speed = 1.1f;
         }
-        else{
+        else
+        {
             speed = 1.5f;
         }
-        
+
         UpdateUI();
 
-        
+
         audioSource = GameObject.Find("Snake").GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         bool isMode = intToBool(PlayerPrefs.GetInt("IsMode"));
         bool isModeJoyStick = intToBool(PlayerPrefs.GetInt("IsModeJoyStick"));
         Time.timeScale = 1;
         GameManager.LoadGameState();  // Load game state if continuing
-        
-       
-        
-        
+
+
+
+
         //bool isLevel = intToBool(PlayerPrefs.GetInt("isLevel"));
 
-        UpdateHighScoreUI();
+        // UpdateHighScoreUI();
 
 
     }
@@ -219,15 +201,15 @@ public class Snake : MonoBehaviour
     private void LoadControlSettings()
     {
 
-    //Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") || PlayerPrefs.HasKey("IsSwipeMode"));
-         // Only load control settings if they are not already set
-    if (!PlayerPrefs.HasKey("IsMode") || !PlayerPrefs.HasKey("IsModeJoyStick") || !PlayerPrefs.HasKey("IsSwipeMode"))
-    {
-        // Set default control settings
-        PlayerPrefs.SetInt("IsMode", 0);
-        PlayerPrefs.SetInt("IsModeJoyStick", 0);
-        PlayerPrefs.SetInt("IsSwipeMode", 1);
-    }
+        //Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") || PlayerPrefs.HasKey("IsSwipeMode"));
+        // Only load control settings if they are not already set
+        if (!PlayerPrefs.HasKey("IsMode") || !PlayerPrefs.HasKey("IsModeJoyStick") || !PlayerPrefs.HasKey("IsSwipeMode"))
+        {
+            // Set default control settings
+            PlayerPrefs.SetInt("IsMode", 0);
+            PlayerPrefs.SetInt("IsModeJoyStick", 0);
+            PlayerPrefs.SetInt("IsSwipeMode", 1);
+        }
         Debug.Log(PlayerPrefs.HasKey("IsMode") || PlayerPrefs.HasKey("IsModeJoyStick") || PlayerPrefs.HasKey("IsSwipeMode"));
         if (!PlayerPrefs.HasKey("IsMode") || !PlayerPrefs.HasKey("IsModeJoyStick") || !PlayerPrefs.HasKey("IsSwipeMode"))
         {
@@ -236,13 +218,6 @@ public class Snake : MonoBehaviour
             PlayerPrefs.SetInt("IsSwipeMode", 1);
         }
 
-    // Load and update control settings
-    bool isMode = PlayerPrefs.GetInt("IsMode", 0) == 1;
-    bool isModeJoyStick = PlayerPrefs.GetInt("IsModeJoyStick", 0) == 1;
-    bool isSwipeMode = PlayerPrefs.GetInt("IsSwipeMode", 0) == 1;
-    
-    UpdateControlSettings(isMode, isModeJoyStick, isSwipeMode);
-    
         bool isMode = PlayerPrefs.GetInt("IsMode", 0) == 1;
         bool isModeJoyStick = PlayerPrefs.GetInt("IsModeJoyStick", 0) == 1;
         bool isSwipeMode = PlayerPrefs.GetInt("IsSwipeMode", 0) == 1;
@@ -298,14 +273,22 @@ public class Snake : MonoBehaviour
             downButton.SetActive(false);
         }
     }
-   
+
     public void SetMoveDirection(Direction direction)
     {
         gridMoveDirection = direction;
     }
+
+    private void UpdateUI()
+    {
+        scoreText.text = "Score: " + score.ToString();
+        highScoreText.text = "High Score: " + PlayerPrefs.GetFloat(HIGH_SCORE_KEY, 0f).ToString();
+
+    }
     private void Awake()
     {
         gridPosition = new Vector3(0, 0);
+        gridMoveTimerMax = 0.09f;
         gridMoveTimer = gridMoveTimerMax;
         // gridMoveDirection = Direction.Right;
         snakeHeadSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -321,16 +304,14 @@ public class Snake : MonoBehaviour
     {
         if (score >= 25)
         {
-            if(difficulty == "Hard"){
+            if (difficulty == "Hard")
+            {
                 speed = 1.5f;
             }
-            else {
+            else
+            {
                 speed = 1.1f;
             }
-    private void Update() {
-        if(score >= 25){
-            
-            speed = 1.1f;
         }
         if (score >= 50)
         {
@@ -348,24 +329,6 @@ public class Snake : MonoBehaviour
         {
             speed = 2f;
         }
-        switch (state) {
-        case State.Alive:
-            HandleInput();
-            if(isSwipeMode == true){
-                HandleTouchInput();
-            }
-            else if(isModeJoyStick == true){
-                FindObjectOfType<JoyStickMovement>().SetMoveDirectionFromJoystick();
-            }
-            HandleGridMovement();
-            HandlePowerups();
-            CheckProximityToFood();
-            CheckProximityToPowerUp();
-           
-            break;
-        case State.Dead:
-        CheckProximityToGameOver();
-            break;
         switch (state)
         {
             case State.Alive:
@@ -379,7 +342,7 @@ public class Snake : MonoBehaviour
                     FindObjectOfType<JoyStickMovement>().SetMoveDirectionFromJoystick();
                 }
                 HandleGridMovement();
-                handlePowerups();
+                HandlePowerups();
                 CheckProximityToFood();
                 CheckProximityToPowerUp();
 
@@ -389,24 +352,10 @@ public class Snake : MonoBehaviour
                 break;
         }
     }
-    private void FixedUpdate() {
-    if (state == State.Alive) {
-       // HandleGridMovement();
-        CheckCollision();
-    }
-    
-}
-    private void UpdateUI()
-    {
-        scoreText.text = "Score: " + score.ToString();
-        highScoreText.text = "High Score: " + PlayerPrefs.GetFloat(HIGH_SCORE_KEY, 0f).ToString();
-        
-    }
     private void FixedUpdate()
     {
         if (state == State.Alive)
         {
-            // HandleGridMovement();
             CheckCollision();
         }
 
@@ -498,80 +447,6 @@ public class Snake : MonoBehaviour
             {
                 Vector2 touchDelta = touch.position - touchStartPos;
 
-            // Check if the touch movement is horizontal or vertical
-            if (Mathf.Abs(touchDelta.x) > Mathf.Abs(touchDelta.y))
-            {
-                // Horizontal movement
-                if (touchDelta.x > 0 && gridMoveDirection != Direction.Left)
-                {
-                    gridMoveDirection = Direction.Right;
-                }
-                else if (touchDelta.x < 0 && gridMoveDirection != Direction.Right)
-                {
-                    gridMoveDirection = Direction.Left;
-                }
-            }
-            else
-            {
-                // Vertical movement
-                if (touchDelta.y > 0 && gridMoveDirection != Direction.Down)
-                {
-                    gridMoveDirection = Direction.Up;
-                }
-                else if (touchDelta.y < 0 && gridMoveDirection != Direction.Up)
-                {
-                    gridMoveDirection = Direction.Down;
-                }
-            }
-        }
-    }    
-}
-
- private void ActivateJoyStick () 
-    {
-        // Check if the GameObject reference is null before accessing it
-    if (joyStick != null)
-    {
-        // Enable joystick
-        joyStick.SetActive(true);
-    }  
-    }
-    private void DeActivateJoyStick () 
-    {
-        // Check if the GameObject reference is null before accessing it
-    if (joyStick != null)
-    {
-        // Disable joystick
-        joyStick.SetActive(false);
-    }   
-    }
-    // Method to activate control buttons
-    private void ActivateControlButtons()
-    {
-         // Check if the GameObject references are null before accessing them
-    if (leftButton != null && rightButton != null && upButton != null && downButton != null)
-    {
-        // Enable control buttons
-        leftButton.SetActive(true);
-        rightButton.SetActive(true);
-        upButton.SetActive(true);
-        downButton.SetActive(true);
-    }
-    }
-
-    // Method to deactivate control buttons
-    private void DeactivateControlButtons()
-    {
-        // Check if the GameObject references are null before accessing them
-    if (leftButton != null && rightButton != null && upButton != null && downButton != null)
-    {
-        // Disable control buttons
-        leftButton.SetActive(false);
-        rightButton.SetActive(false);
-        upButton.SetActive(false);
-        downButton.SetActive(false);
-    }
-    }
                 if (Mathf.Abs(touchDelta.x) > Mathf.Abs(touchDelta.y))
                 {
                     if (touchDelta.x > 0 && gridMoveDirection != Direction.Left)
@@ -656,7 +531,7 @@ public class Snake : MonoBehaviour
                 audioSource.PlayOneShot(eatSound);
                 snakeBodySize++;
                 CreateSnakeBodyPart();
-                //UpdateScoreUI();
+                // UpdateScoreUI();
                 UpdateScore(BASE_SCORE_INCREMENT);
                 ChangeSprite(normalHead);
             }
@@ -733,7 +608,6 @@ public class Snake : MonoBehaviour
         }
         return gridPositionList;
     }
-
     private void UpdateScore(float increment)
     {
         if (powerup2XActive)
@@ -752,27 +626,16 @@ public class Snake : MonoBehaviour
             UpdateUI();
         }
     }
-    
-
     private void HandlePowerups()
     {
         if (powerup2XActive || PowerupLifeActive)
         {
             if (powerupCoroutine == null)
-        if (powerup2XActive || PowerupLifeActive)
-        {
-
-            currentPowerupTime -= Time.deltaTime;
-            powerUpDurationText.text = "Power-up:" + Mathf.Ceil(currentPowerupTime) + "s";
-            powerUpDurationText.enabled = true;
-
-            if (currentPowerupTime > 0)
             {
                 powerupCoroutine = StartCoroutine(PowerupDurationCoroutine());
             }
         }
     }
-
     private IEnumerator PowerupDurationCoroutine()
     {
         float currentPowerupTime = powerupDuration;
@@ -785,76 +648,29 @@ public class Snake : MonoBehaviour
             powerUpDurationText.enabled = true;
             yield return null;
         }
-        
+
         powerUpDurationText.enabled = false; // Hide the text when no power-up is active
         DeactivatePowerup2X();
         DeactivatePowerupLife();
         powerupCoroutine = null;
-            if (currentPowerupTime <= 0)
-            {
-                DeactivatePowerup2X();
-                DeactivatePowerupLife();
-
-                powerUpDurationText.enabled = false;
-            }
-        }
-        else
-        {
-            powerUpDurationText.enabled = false;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-{
-    //Debug.Log("Trigger Entered");
     {
         Debug.Log("Trigger Entered");
 
-    if (collision.gameObject.tag == "Food" && !foodBeingConsumed)
-    {
-    
-        return;
-    }
         if (collision.gameObject.tag == "Food" && !foodBeingConsumed)
         {
-            UpdateScoreUI();
             return;
         }
 
-    if (collision.gameObject.tag == "PowerUp")
-    {
-        //Debug.Log("2xpoerupactive");
-        audioSource.PlayOneShot(powerUpSound);
-        particleEffects2XPowerUp.gameObject.SetActive(true);
-        FindObjectOfType<PowerupManager>().DestroyPowerup();
         if (collision.gameObject.tag == "PowerUp")
         {
-            Debug.Log("2xpoerupactive");
+            // Debug.Log("2xpoerupactive");
             audioSource.PlayOneShot(powerUpSound);
             particleEffects2XPowerUp.gameObject.SetActive(true);
             FindObjectOfType<PowerupManager>().DestroyPowerup();
 
-        ActivatePowerup2X();
-    }
-    else if (collision.gameObject.tag == "PowerUpLife")
-    {
-        //Debug.Log("powerUpLifeActive");
-        
-        audioSource.PlayOneShot(powerUpSound);
-        particleEffectsLifePowerUp.gameObject.SetActive(true);
-        FindObjectOfType<PowerupManager>().DestroyPowerup();
-
-        ActivatePowerUpLife();
-    }
-    else if(collision.gameObject.tag == "Coin")
-    {
-        audioSource.PlayOneShot(powerUpSound);
-        FindObjectOfType<PowerupManager>().DestroyPowerup(); 
-        GameManager.AddCoins(1); // Update the coin count using GameManager
-        //GameManager.coinCount++;
-        UpdateCoinsCollectedUI();   
-    }
-}
             ActivatePowerup2X();
         }
         else if (collision.gameObject.tag == "PowerUpLife")
@@ -865,24 +681,18 @@ public class Snake : MonoBehaviour
             FindObjectOfType<PowerupManager>().DestroyPowerup();
             ActivatePowerUpLife();
         }
+        else if (collision.gameObject.tag == "Coin")
+        {
+            audioSource.PlayOneShot(powerUpSound);
+            FindObjectOfType<PowerupManager>().DestroyPowerup();
+            GameManager.AddCoins(1); // Update the coin count using GameManager
+            //GameManager.coinCount++;
+            UpdateCoinsCollectedUI();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-         
-        GameOver();    
-    }
-    if(collision.gameObject.tag == "Wall" && PowerupLifeActive == false) 
-    {
-        
-         
-        GameOver();
-        
-    }
-    
-}
-
-
         if (collision.gameObject.tag == "Monster" && PowerupLifeActive == false)
         {
             GameOver();
@@ -894,40 +704,39 @@ public class Snake : MonoBehaviour
 
     }
 
-public void GameOver()
-{
-   
-    //particleEffects.gameObject.SetActive(true);
-    GameManager.SaveGameState();  // Save the game state
-    state = State.Dead;
-    Time.timeScale = 0;
-    // FindObjectOfType<MonsterMovement>().StopMonsterMovements();
-    // FindObjectOfType<PowerupManager>().StopPowerupSpawning();
-    gameoverPanel.SetActive(true);
-    pauseButton.gameObject.SetActive(false);
-    scoreText.gameObject.SetActive(false);
-    highScoreText.gameObject.SetActive(false);
+    public void GameOver()
+    {
+        //particleEffects.gameObject.SetActive(true);
+        GameManager.SaveGameState();  // Save the game state
+        state = State.Dead;
+        Time.timeScale = 0;
+        // FindObjectOfType<MonsterMovement>().StopMonsterMovements();
+        // FindObjectOfType<PowerupManager>().StopPowerupSpawning();
+        gameoverPanel.SetActive(true);
+        pauseButton.gameObject.SetActive(false);
+        scoreText.gameObject.SetActive(false);
+        highScoreText.gameObject.SetActive(false);
 
-    // SceneManager.LoadScene("GameOverScene");
-   
-}
-public void ContinueGame()
-{
-    state = State.Alive;
-    Time.timeScale = 1;
-    pauseButton.gameObject.SetActive(true);
-    scoreText.gameObject.SetActive(true);
-    highScoreText.gameObject.SetActive(true);
-    // Resume any other game logic or states that need to be reset
-    UpdateUI();  // Update the UI to reflect the loaded score and other states
-    StartCoroutine(ActivatePowerupLife());
-}
+        // SceneManager.LoadScene("GameOverScene");
+    }
 
-private IEnumerator ActivatePowerupLife()
+    public void ContinueGame()
+    {
+        state = State.Alive;
+        Time.timeScale = 1;
+        pauseButton.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(true);
+        highScoreText.gameObject.SetActive(true);
+        // Resume any other game logic or states that need to be reset
+        UpdateUI();  // Update the UI to reflect the loaded score and other states
+        StartCoroutine(ActivatePowerupLife());
+    }
+
+    private IEnumerator ActivatePowerupLife()
     {
         PowerupLifeActive = true;
         // Blink effect
-        
+
         float blinkDuration = 0.2f; // Duration for each blink
         float blinkTimer = 0f;
         SpriteRenderer snakeSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -938,7 +747,7 @@ private IEnumerator ActivatePowerupLife()
             if (blinkTimer >= blinkDuration)
             {
                 snakeSpriteRenderer.enabled = !snakeSpriteRenderer.enabled; // Toggle visibility
-                
+
                 blinkTimer = 0f;
             }
 
@@ -951,14 +760,11 @@ private IEnumerator ActivatePowerupLife()
         PowerupLifeActive = false;
     }
 
-
-
     public void UpdateCoinsCollectedUI()
-    public void GameOver()
     {
-        //particleEffects.gameObject.SetActive(true);
-        state = State.Dead;
-        SceneManager.LoadScene("GameOverScene");
+        coinsCollectedText.text = "Coins: " + PlayerPrefs.GetInt("CoinCount");
+        Debug.Log("Collected Coins Snake:" + coinsCollectedText.text);
+
     }
 
     public void UpdateScoreUI()
@@ -982,9 +788,7 @@ private IEnumerator ActivatePowerupLife()
 
     public void UpdateHighScoreUI()
     {
-    coinsCollectedText.text = "Coins: " + PlayerPrefs.GetInt("CoinCount");
-    Debug.Log("Collected Coins Snake:" + coinsCollectedText.text);
-
+        highScoreText.text = "High Score:" + PlayerPrefs.GetFloat("HighScore", 0);
     }
 
     public void ActivatePowerup2X()
@@ -1037,26 +841,24 @@ private IEnumerator ActivatePowerupLife()
         private SnakeMovePosition snakeMovePosition;
         private Transform transform;
 
-        public SnakeBodyPart(int bodyIndex) {
+        public SnakeBodyPart(int bodyIndex)
+        {
             // GameObject snakeBodyGameObject = new GameObject("SnakeBody", typeof(SpriteRenderer));
             // snakeBodyGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.snakeBodySprite;
             // snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = -1 - bodyIndex;
             // transform = snakeBodyGameObject.transform;
             // Instantiate the snake body part prefab
-            GameObject snakeBodyGameObject = Object.Instantiate(GameAssets.i.snakeBodySprite);
+            GameObject snakeBodyGameObject = GameObject.Instantiate(GameAssets.i.snakeBodySprite);
 
             // Set the sorting order
-        public SnakeBodyPart(int bodyIndex)
-        {
-            GameObject snakeBodyGameObject = new GameObject("SnakeBody", typeof(SpriteRenderer));
-            snakeBodyGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.snakeBodySprite;
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = -1 - bodyIndex;
 
             // Assign the transform
             transform = snakeBodyGameObject.transform;
         }
 
-        public void SetSnakeMovePosition(SnakeMovePosition snakeMovePosition) {
+        public void SetSnakeMovePosition(SnakeMovePosition snakeMovePosition)
+        {
             this.snakeMovePosition = snakeMovePosition;
 
             transform.position = new Vector3(snakeMovePosition.GetGridPosition().x, snakeMovePosition.GetGridPosition().y);

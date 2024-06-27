@@ -23,7 +23,7 @@ public class GameAssets : MonoBehaviour
         i = this;
     }
     
-    public Sprite snakeHeadSprite;
+    public GameObject snakeHeadSprite;
     public GameObject snakeBodySprite;
     public Sprite foodSprite;
 

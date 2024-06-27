@@ -34,9 +34,9 @@ public class PowerupManager : MonoBehaviour
             {
                 // Randomly choose which powerup to spawn
                 float randomValue = Random.Range(0f,1f);
-                if (randomValue < 0.45f)
+                if (randomValue < 0.33f)
                     SpawnPowerup(powerupPrefab2X);
-                else if(randomValue < 0.90)
+                else if(randomValue < 0.66)
                     SpawnPowerup(powerupPrefabLife);
                 else
                     SpawnPowerup(coin);   

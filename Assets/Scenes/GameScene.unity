@@ -461,13 +461,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerup2XActive: 0
+  powerupDuration: 15
+  currentPowerupTime: 0
   powerUpDurationText: {fileID: 0}
-  gameOverCanvas: {fileID: 0}
+  gmaeAssets: {fileID: 0}
+  monsters: {fileID: 0}
+  particleEffects: {fileID: 0}
+  coinsCollectedText: {fileID: 0}
+  particleEffects2XPowerUp: {fileID: 0}
+  particleEffectsLifePowerUp: {fileID: 0}
   gameOverSound: {fileID: 0}
   powerUpSound: {fileID: 0}
-  score: 0
+  eatSound: {fileID: 0}
+  gridMoveDirection: 0
+  gridPosition: {x: 0, y: 0, z: 0}
   scoreText: {fileID: 0}
   highScoreText: {fileID: 0}
+  pauseButton: {fileID: 0}
+  leftButton: {fileID: 0}
+  rightButton: {fileID: 0}
+  upButton: {fileID: 0}
+  downButton: {fileID: 0}
+  joyStick: {fileID: 0}
+  Walls: {fileID: 0}
+  normalHead: {fileID: 0}
+  nearFoodHead: {fileID: 0}
+  gameOverHead: {fileID: 0}
+  gameoverPanel: {fileID: 0}
 --- !u!1 &1191580471
 GameObject:
   m_ObjectHideFlags: 0

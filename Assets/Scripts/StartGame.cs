@@ -20,15 +20,11 @@ public class StartGame : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip clickAudioClip;
     public GameObject difficultyCanvas;
-    public TextMeshProUGUI coinText;
    
     
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        // Update coin count UI at the start
-        UpdateCoinUI();
-    
     }
     // Update is called once per frame
     void Update()
@@ -90,10 +86,5 @@ public class StartGame : MonoBehaviour
         {
         audioSource.PlayOneShot(clickAudioClip);
         }
-    }
-    private void UpdateCoinUI()
-    {
-        coinText.text = "Coins: " + PlayerPrefs.GetInt("CoinCount");
-
     }
 }
